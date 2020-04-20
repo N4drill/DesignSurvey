@@ -9,13 +9,23 @@ import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapt
 import com.example.androidsampleconfiguration.commons.extensions.autoNotify
 import com.example.androidsampleconfiguration.databinding.ItemQuestionBinding
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.Direction
+import com.yuyakaido.android.cardstackview.StackFrom
+import com.yuyakaido.android.cardstackview.SwipeableMethod
 import kotlin.properties.Delegates
 
-class SurveyCardStackLayoutManager(
-    private val context: Context
-) : CardStackLayoutManager(context) {
+class SurveyCardStackLayoutManager(context: Context) : CardStackLayoutManager(context) {
     init {
-
+        setStackFrom(StackFrom.Top)
+        setVisibleCount(2)
+        setTranslationInterval(4.0f)
+        setScaleInterval(0.75f)
+        setMaxDegree(40.0f)
+        setDirections(Direction.HORIZONTAL)
+        setSwipeThreshold(0.9f)
+        setCanScrollHorizontal(true)
+        setCanScrollVertical(true)
+        setSwipeableMethod(SwipeableMethod.Manual)
     }
 }
 
@@ -38,7 +48,7 @@ class SurveyCardStackAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
         holder.bind(question = questions[position])
     }
 
-    class QuestionViewHolder(private val binding: ItemQuestionBinding) :
+    class QuestionViewHolder(binding: ItemQuestionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(question: Question) {
 
