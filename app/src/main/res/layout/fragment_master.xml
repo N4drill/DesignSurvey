@@ -14,17 +14,29 @@
         android:id="@+id/master_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/padding_default"
         tools:context=".app.ui.master.MasterFragment">
 
-
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_title_message"
+            android:layout_width="@dimen/match_constraints"
             android:layout_height="wrap_content"
-            android:text="Sample text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/padding_default"
+            android:text="@string/welcome_back"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_big"
+            app:layout_constraintBottom_toTopOf="@id/card_stack"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.yuyakaido.android.cardstackview.CardStackView
+            android:id="@+id/card_stack"
+            android:layout_width="@dimen/match_constraints"
+            android:layout_height="@dimen/match_constraints"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_message" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
