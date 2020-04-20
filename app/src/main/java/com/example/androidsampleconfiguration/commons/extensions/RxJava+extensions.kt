@@ -5,6 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
 fun Disposable.addTo(compositeDisposable: CompositeDisposable) {
@@ -12,6 +13,9 @@ fun Disposable.addTo(compositeDisposable: CompositeDisposable) {
 }
 
 fun <T> PublishSubject<T>.observerOnMain(): Observable<T> =
+    observeOn(AndroidSchedulers.mainThread())
+
+fun <T> BehaviorSubject<T>.observerOnMain(): Observable<T> =
     observeOn(AndroidSchedulers.mainThread())
 
 fun <T> Observable<T>.subscribeOnComputation(): Observable<T> =
