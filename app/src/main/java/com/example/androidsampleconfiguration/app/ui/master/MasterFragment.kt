@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProviders
+import com.example.androidsampleconfiguration.app.ui.DaggerViewModelFactory
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SampleAction
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SampleObjectAction
@@ -17,14 +18,20 @@ import com.example.androidsampleconfiguration.databinding.FragmentMasterBinding
 import dagger.android.support.DaggerFragment
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
+import javax.inject.Inject
 
 class MasterFragment : DaggerFragment() {
 
-    private val viewModel: MasterViewModel by activityViewModels()
     private val compositeDisposable = CompositeDisposable()
 
     private val surveyAdapter: SurveyCardStackAdapter by lazy { SurveyCardStackAdapter() }
 
+    @Inject
+    lateinit var factory: DaggerViewModelFactory<MasterViewModel>
+
+    private val viewModel: MasterViewModel by lazy {
+        ViewModelProviders.of(this@MasterFragment, factory).get(MasterViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +77,6 @@ class MasterFragment : DaggerFragment() {
 
     private fun onAction(action: Action) {}
     private fun onCommand(command: Command) {}
-
 
     override fun onDestroy() {
         super.onDestroy()

@@ -1,6 +1,7 @@
 package com.example.androidsampleconfiguration.commons.extensions
 
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -23,3 +24,12 @@ fun <T> Observable<T>.subscribeOnComputation(): Observable<T> =
 
 fun <T> Observable<T>.subscribeOnIO(): Observable<T> =
     subscribeOn(Schedulers.io())
+
+fun <T> Single<T>.subscribeOnComputation(): Single<T> =
+    subscribeOn(Schedulers.computation())
+
+fun <T> Single<T>.subscribeOnIO(): Single<T> =
+    subscribeOn(Schedulers.io())
+
+fun <T> Single<T>.observeOnMain(): Single<T> =
+    observeOn(AndroidSchedulers.mainThread())

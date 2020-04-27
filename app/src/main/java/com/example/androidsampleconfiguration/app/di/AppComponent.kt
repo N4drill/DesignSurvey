@@ -3,6 +3,7 @@ package com.example.androidsampleconfiguration.app.di
 import com.example.androidsampleconfiguration.app.App
 import com.example.androidsampleconfiguration.app.di.builders.ActivityBuilder
 import com.example.androidsampleconfiguration.app.di.modules.AppModule
+import com.example.androidsampleconfiguration.app.di.modules.FirebaseModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
@@ -15,6 +16,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AndroidSupportInjectionModule::class,
         AppModule::class,
+        FirebaseModule::class,
         ActivityBuilder::class
     ]
 )
