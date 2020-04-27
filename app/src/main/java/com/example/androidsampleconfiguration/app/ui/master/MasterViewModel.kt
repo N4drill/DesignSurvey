@@ -5,6 +5,7 @@ import com.example.androidsampleconfiguration.app.App
 import com.example.androidsampleconfiguration.app.dataaccess.repository.QuestionRepository
 import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.presentation.toQuestions
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.observeOnMain
 import com.example.androidsampleconfiguration.commons.extensions.observerOnMain
@@ -41,6 +42,9 @@ class MasterViewModel @Inject constructor(
         questionRepository.getAll()
             .subscribeOnIO()
             .observeOnMain()
+            .doAfterSuccess {
+                actionSubject.onNext(ItemsLoaded)
+            }
             .subscribe({
                 Timber.d("Emitted new ${it.size} questions")
                 questionsSubject.onNext(it.toQuestions(masterFragment))
@@ -52,6 +56,7 @@ class MasterViewModel @Inject constructor(
     //region Actions and Commands
     sealed class Action {
 
+        object ItemsLoaded : Action()
         data class SampleAction(val data: String) : Action()
         object SampleObjectAction : Action()
     }

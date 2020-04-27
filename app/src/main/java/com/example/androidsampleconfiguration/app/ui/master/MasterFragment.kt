@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.app.ui.DaggerViewModelFactory
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SampleAction
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SampleObjectAction
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Command
@@ -29,6 +31,8 @@ class MasterFragment : DaggerFragment() {
     @Inject
     lateinit var factory: DaggerViewModelFactory<MasterViewModel>
 
+    lateinit var binding: FragmentMasterBinding
+
     private val viewModel: MasterViewModel by lazy {
         ViewModelProviders.of(this@MasterFragment, factory).get(MasterViewModel::class.java)
     }
@@ -37,10 +41,16 @@ class MasterFragment : DaggerFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = FragmentMasterBinding.inflate(inflater, container, false).apply {
+        binding = this
         viewModel.observeViewModel()
+        initBinding()
         setupCardStack()
         Timber.d("Master Fragment created")
     }.root
+
+    private fun FragmentMasterBinding.initBinding() {
+        progressVisible = true
+    }
 
     private fun FragmentMasterBinding.setupCardStack() {
         cardStack.apply {
@@ -59,6 +69,7 @@ class MasterFragment : DaggerFragment() {
         actions
             .subscribe({
                 when (it) {
+                    ItemsLoaded -> onItemsLoaded()
                     is SampleAction -> onAction(it)
                     SampleObjectAction -> onAction(it)
                 }.exhaustivePatternCheck()
@@ -73,6 +84,12 @@ class MasterFragment : DaggerFragment() {
                 }.exhaustivePatternCheck()
             }, { Timber.d(it, "Something went wrong observing COMMANDS") })
             .addTo(compositeDisposable)
+    }
+
+    private fun onItemsLoaded() {
+        binding.progressVisible = false
+        binding.tvMessage.text = getString(R.string.thanks_message)
+        binding.tvMessage.visibility = View.VISIBLE
     }
 
     private fun onAction(action: Action) {}
