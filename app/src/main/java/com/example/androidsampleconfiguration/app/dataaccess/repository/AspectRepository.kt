@@ -2,11 +2,11 @@ package com.example.androidsampleconfiguration.app.dataaccess.repository
 
 import com.example.androidsampleconfiguration.app.dataaccess.FirebaseService
 import com.example.androidsampleconfiguration.app.dataaccess.model.AspectFirestore
-import com.example.androidsampleconfiguration.app.entity.Question.Aspect
-import com.example.androidsampleconfiguration.app.entity.Question.Aspect.COLOR
-import com.example.androidsampleconfiguration.app.entity.Question.Aspect.PLACEMENT
-import com.example.androidsampleconfiguration.app.entity.Question.Aspect.READABILITY
-import com.example.androidsampleconfiguration.app.entity.Question.Aspect.SIZING
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.COLOR
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.PLACEMENT
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.READABILITY
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.SIZING
 import com.google.firebase.firestore.DocumentReference
 import io.reactivex.Observable
 import io.reactivex.Single

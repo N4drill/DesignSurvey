@@ -1,6 +1,6 @@
 package com.example.androidsampleconfiguration.app.entity
 
-data class Question(
+data class QuestionEntity(
     val id: String,
     val aspects: List<Aspect>,
     val type: Type,

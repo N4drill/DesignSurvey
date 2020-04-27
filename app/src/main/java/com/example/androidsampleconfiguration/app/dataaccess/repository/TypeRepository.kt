@@ -2,10 +2,10 @@ package com.example.androidsampleconfiguration.app.dataaccess.repository
 
 import com.example.androidsampleconfiguration.app.dataaccess.FirebaseService
 import com.example.androidsampleconfiguration.app.dataaccess.model.TypeFirestore
-import com.example.androidsampleconfiguration.app.entity.Question.Type
-import com.example.androidsampleconfiguration.app.entity.Question.Type.COMPONENT
-import com.example.androidsampleconfiguration.app.entity.Question.Type.LAYOUT
-import com.example.androidsampleconfiguration.app.entity.Question.Type.TEXT_FIELD
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type.COMPONENT
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type.LAYOUT
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type.TEXT_FIELD
 import com.google.firebase.firestore.DocumentReference
 import io.reactivex.Single
 import javax.inject.Inject
