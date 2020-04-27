@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">AndroidSampleConfiguration</string>
+    <string name="app_name">DesignSurvey</string>
     <string name="welcome_back">Welcome back</string>
     <string name="placeholder_image">placeholder_image</string>
     <string name="thanks_message">Yay! You have finished all questions.\n Thanks!</string>
     <string name="placeholder">Placeholder</string>
+    <string name="application_loading">Application is loading, please wait...</string>
+    <string name="app_title">DesignSurvey</string>
 </resources>
