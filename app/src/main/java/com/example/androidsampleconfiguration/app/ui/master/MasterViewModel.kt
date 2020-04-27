@@ -4,6 +4,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.androidsampleconfiguration.app.App
 import com.example.androidsampleconfiguration.app.dataaccess.repository.QuestionRepository
 import com.example.androidsampleconfiguration.app.presentation.Question
+import com.example.androidsampleconfiguration.app.presentation.toQuestions
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.observeOnMain
 import com.example.androidsampleconfiguration.commons.extensions.observerOnMain
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 class MasterViewModel @Inject constructor(
     application: App,
-    questionRepository: QuestionRepository
+    questionRepository: QuestionRepository,
+    private val masterFragment: MasterFragment
 ) : AndroidViewModel(application) {
 
     private val compositeDisposable = CompositeDisposable()
@@ -25,7 +27,7 @@ class MasterViewModel @Inject constructor(
     // -- Subjects
     private val actionSubject = PublishSubject.create<Action>()
     private val commandSubject = PublishSubject.create<Command>()
-    private val questionsSubject = BehaviorSubject.createDefault((1..100).map { Question("x") })
+    private val questionsSubject = BehaviorSubject.createDefault(emptyList<Question>())
 
     // -- Streams
     val actions: Observable<Action>
@@ -40,7 +42,8 @@ class MasterViewModel @Inject constructor(
             .subscribeOnIO()
             .observeOnMain()
             .subscribe({
-                Timber.d("$it")
+                Timber.d("Emitted new ${it.size} questions")
+                questionsSubject.onNext(it.toQuestions(masterFragment))
             }, { Timber.e(it, "Something went wrong with QUESTIONS REPOSITORY") })
             .addTo(compositeDisposable)
 

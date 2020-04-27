@@ -31,7 +31,7 @@ class SurveyCardStackLayoutManager(context: Context) : CardStackLayoutManager(co
 
 class SurveyCardStackAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
     var questions: List<Question> by Delegates.observable(emptyList()) { _, old, new ->
-        autoNotify(old, new) { other -> name == other.name }
+        autoNotify(old, new) { other -> id == other.id }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder =
@@ -48,10 +48,11 @@ class SurveyCardStackAdapter : RecyclerView.Adapter<QuestionViewHolder>() {
         holder.bind(question = questions[position])
     }
 
-    class QuestionViewHolder(binding: ItemQuestionBinding) :
+    class QuestionViewHolder(private val binding: ItemQuestionBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(question: Question) {
 
+        fun bind(question: Question) {
+            question.image.into(binding.ivCard)
         }
     }
 
