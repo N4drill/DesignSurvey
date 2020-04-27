@@ -6,4 +6,26 @@
     <string name="placeholder">Placeholder</string>
     <string name="application_loading">Application is loading, please wait...</string>
     <string name="app_title">DesignSurvey</string>
+    <string name="form_title">Tell me something about you</string>
+    <string name="label_sex">Sex</string>
+    <string name="switch_male">Male</string>
+    <string name="switch_female">Female</string>
+    <string name="form_age">Age</string>
+    <string name="form_profession">Profession</string>
+    <string name="form_design_experience">Design Experience</string>
+    <string name="form_accept">Accept</string>
+
+    <!-- Arrays -->
+
+    <string-array name="professions">
+        <item>Backend Developer</item>
+        <item>Designer</item>
+        <item>Frontend developer</item>
+        <item>Mobile Developer</item>
+        <item>Analyst</item>
+        <item>Working with people</item>
+        <item>Other</item>
+
+
+    </string-array>
 </resources>

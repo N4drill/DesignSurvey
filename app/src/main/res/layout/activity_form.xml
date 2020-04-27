@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_background"
+        android:padding="@dimen/padding_big"
+        tools:context=".app.ui.userform.FormActivity">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/form_title"
+            android:textSize="@dimen/font_big"
+            app:layout_constraintBottom_toTopOf="@id/sex_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+
+        <TextView
+            android:id="@+id/sex_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/match_constraints"
+            android:layout_marginTop="@dimen/margin_small"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="bottom|left"
+            android:padding="@dimen/padding_tiny"
+            android:text="@string/label_sex"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toTopOf="@id/s_sex"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <Switch
+            android:id="@+id/s_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/match_constraints"
+            android:gravity="center"
+            android:textOff="@string/switch_male"
+            android:textOn="@string/switch_female"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toTopOf="@id/age_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sex_label" />
+
+        <TextView
+            android:id="@+id/age_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/match_constraints"
+            android:layout_marginTop="@dimen/margin_small"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="bottom"
+            android:text="@string/form_age"
+
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toTopOf="@id/seek_age"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/s_sex" />
+
+
+        <SeekBar
+            android:id="@+id/seek_age"
+            android:layout_width="@dimen/match_constraints"
+            android:layout_height="@dimen/match_constraints"
+            app:layout_constraintBottom_toTopOf="@id/profession_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/age_label" />
+
+        <TextView
+            android:id="@+id/profession_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/match_constraints"
+            android:layout_marginTop="@dimen/margin_small"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="bottom"
+            android:text="@string/form_profession"
+
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toTopOf="@id/spinner_profession"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seek_age" />
+
+        <Spinner
+            android:id="@+id/spinner_profession"
+            android:layout_width="@dimen/match_constraints"
+            android:layout_height="@dimen/match_constraints"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toTopOf="@id/design_exp_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profession_label" />
+
+        <TextView
+            android:id="@+id/design_exp_label"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/match_constraints"
+            android:layout_marginTop="@dimen/margin_small"
+
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="bottom"
+            android:text="@string/form_design_experience"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toTopOf="@id/seek_exp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_profession" />
+
+        <SeekBar
+            android:id="@+id/seek_exp"
+            android:layout_width="@dimen/match_constraints"
+            android:layout_height="@dimen/match_constraints"
+            app:layout_constraintBottom_toTopOf="@id/btn_accept"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/design_exp_label" />
+
+        <Button
+            android:id="@+id/btn_accept"
+            android:layout_width="@dimen/match_constraints"
+            android:layout_height="@dimen/match_constraints"
+            android:layout_marginTop="@dimen/padding_default"
+            android:text="@string/form_accept"
+            android:textAllCaps="false"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seek_exp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
