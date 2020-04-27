@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.app.domain.SharedPreferenceManager
 import com.example.androidsampleconfiguration.app.ui.MainActivity
+import com.example.androidsampleconfiguration.app.ui.userform.FormActivity
 import com.example.androidsampleconfiguration.databinding.ActivitySplashBinding
 import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
@@ -25,6 +26,8 @@ class SplashActivity : DaggerAppCompatActivity() {
         when (isFirstEntrance()) {
             true -> {
                 Timber.d("First entrance in application, intent to form")
+                val formIntent = Intent(this, FormActivity::class.java)
+                startActivity(formIntent)
             }
             false -> {
                 Timber.d("User id found: ${sharedPreferenceManager.getUserId()}, going to masterActivity")
