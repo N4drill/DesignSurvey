@@ -38,4 +38,5 @@ class SplashActivity : DaggerAppCompatActivity() {
     }
 
     private fun isFirstEntrance(): Boolean = sharedPreferenceManager.getUserId() == null
+    //TODO: Add firestore user verification
 }

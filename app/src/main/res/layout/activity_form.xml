@@ -12,6 +12,12 @@
         <variable
             name="minExp"
             type="int" />
+
+        <variable
+            name="progressVisibility"
+            type="boolean" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -192,6 +198,18 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seek_exp" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:visibility="@{progressVisibility ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/btn_accept"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="@id/btn_accept"
+            app:layout_constraintRight_toRightOf="@id/btn_accept"
+            app:layout_constraintTop_toTopOf="@id/btn_accept" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.androidsampleconfiguration.app.ui.userform
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,9 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import androidx.databinding.DataBindingUtil
 import com.example.androidsampleconfiguration.R
+import com.example.androidsampleconfiguration.app.dataaccess.repository.UserRepository
+import com.example.androidsampleconfiguration.app.domain.SharedPreferenceManager
+import com.example.androidsampleconfiguration.app.ui.MainActivity
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender.FEMALE
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender.MALE
@@ -17,11 +21,18 @@ import com.example.androidsampleconfiguration.databinding.ActivityFormBinding
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
 class FormActivity : DaggerAppCompatActivity() {
 
     private lateinit var binding: ActivityFormBinding
+
+    @Inject
+    lateinit var userRepository: UserRepository
+
+    @Inject
+    lateinit var sharedPreferenceManager: SharedPreferenceManager
 
     private val onDestroyDisposable = CompositeDisposable()
     private var currentUserModel: UserModel by Delegates.observable(
@@ -42,9 +53,7 @@ class FormActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         DataBindingUtil.setContentView<ActivityFormBinding>(this, R.layout.activity_form).apply {
             binding = this
-            currentUserModel = currentUserModel // TODO: Kinda tricky....
-            minAge = MIN_AGE
-            minExp = MIN_EXP
+            setupDefaults()
             setupGenderSwitch()
             setupProfessionSpinner()
             setupAgeSeekBar()
@@ -55,14 +64,33 @@ class FormActivity : DaggerAppCompatActivity() {
         Timber.d("Form layout started")
     }
 
+    private fun ActivityFormBinding.setupDefaults() {
+        currentUserModel = currentUserModel // TODO: Kinda tricky....
+        minAge = MIN_AGE
+        minExp = MIN_EXP
+        changeProgressVisibility(false)
+    }
+
+    private fun checkValidation(): Boolean = true //TODO: do I need this ?
+
     private fun ActivityFormBinding.setupCta() {
         btnAccept.setOnClickListener {
-            with(currentUserModel) {
-                //TODO: Setup model verification
-                //TODO: Format profession
-                //TODO: Save user model to firestore.
+            changeProgressVisibility(true)
+            if (checkValidation()) {
+                with(currentUserModel) {
+                    userRepository.insert(currentUserModel)
+                        .doAfterSuccess {
+                            changeProgressVisibility(false)
+                            val masterIntent = Intent(this@FormActivity, MainActivity::class.java)
+                            startActivity(masterIntent)
+                        }
+                        .subscribe({
+                            Timber.d("New user inserted, fetched id: ${it.id}")
+                            sharedPreferenceManager.saveUserId(it.id)
+                        }, { Timber.e(it, "Error while inserting user") })
 
-                printInfo("Saving  UserMode")
+                    printInfo("Saving  UserModel")
+                }
             }
         }
     }
@@ -162,6 +190,11 @@ class FormActivity : DaggerAppCompatActivity() {
                 femaleLabel.setTypeface(null, Typeface.BOLD)
             }
         }
+    }
+
+    private fun changeProgressVisibility(isVisible: Boolean) {
+        binding.progressVisibility = isVisible
+        binding.btnAccept.isClickable = !isVisible
     }
 
     private fun Int.formatDesignExperience(): String = getString(
