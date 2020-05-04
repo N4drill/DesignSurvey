@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="minAge"
+            type="int" />
+
+        <variable
+            name="minExp"
+            type="int" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,13 +45,25 @@
             android:padding="@dimen/padding_tiny"
             android:text="@string/label_sex"
             android:textSize="@dimen/font_normal"
-            app:layout_constraintBottom_toTopOf="@id/s_sex"
+            app:layout_constraintBottom_toTopOf="@id/s_gender"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
+        <TextView
+            android:id="@+id/male_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_big"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/switch_male"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toBottomOf="@id/s_gender"
+            app:layout_constraintRight_toLeftOf="@id/s_gender"
+            app:layout_constraintTop_toTopOf="@id/s_gender" />
+
         <Switch
-            android:id="@+id/s_sex"
+            android:id="@+id/s_gender"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/match_constraints"
             android:gravity="center"
@@ -57,6 +76,18 @@
             app:layout_constraintTop_toBottomOf="@id/sex_label" />
 
         <TextView
+            android:id="@+id/female_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_big"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/switch_female"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toBottomOf="@id/s_gender"
+            app:layout_constraintLeft_toRightOf="@id/s_gender"
+            app:layout_constraintTop_toTopOf="@id/s_gender" />
+
+        <TextView
             android:id="@+id/age_label"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/match_constraints"
@@ -64,18 +95,29 @@
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
             android:text="@string/form_age"
-
             android:textSize="@dimen/font_normal"
             app:layout_constraintBottom_toTopOf="@id/seek_age"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/s_sex" />
+            app:layout_constraintTop_toBottomOf="@id/s_gender" />
 
+
+        <TextView
+            android:id="@+id/tv_current_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_default"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="bottom"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toBottomOf="@id/age_label"
+            app:layout_constraintLeft_toRightOf="@id/age_label"
+            tools:text="20" />
 
         <SeekBar
             android:id="@+id/seek_age"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
+            android:min="@{minAge}"
             app:layout_constraintBottom_toTopOf="@id/profession_label"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -89,11 +131,9 @@
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
             android:text="@string/form_profession"
-
             android:textSize="@dimen/font_normal"
             app:layout_constraintBottom_toTopOf="@id/spinner_profession"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seek_age" />
 
         <Spinner
@@ -111,20 +151,30 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/match_constraints"
             android:layout_marginTop="@dimen/margin_small"
-
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
             android:text="@string/form_design_experience"
             android:textSize="@dimen/font_normal"
             app:layout_constraintBottom_toTopOf="@id/seek_exp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner_profession" />
+
+        <TextView
+            android:id="@+id/tv_current_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_default"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="@dimen/font_normal"
+            app:layout_constraintBottom_toBottomOf="@id/design_exp_label"
+            app:layout_constraintLeft_toRightOf="@id/design_exp_label"
+            tools:text="4" />
 
         <SeekBar
             android:id="@+id/seek_exp"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
+            android:min="@{minExp}"
             app:layout_constraintBottom_toTopOf="@id/btn_accept"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

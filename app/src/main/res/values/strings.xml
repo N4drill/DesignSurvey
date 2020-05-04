@@ -7,24 +7,31 @@
     <string name="application_loading">Application is loading, please wait...</string>
     <string name="app_title">DesignSurvey</string>
     <string name="form_title">Tell me something about you</string>
-    <string name="label_sex">Sex</string>
+    <string name="label_sex">Gender</string>
     <string name="switch_male">Male</string>
     <string name="switch_female">Female</string>
-    <string name="form_age">Age</string>
+    <string name="form_age">Age:</string>
     <string name="form_profession">Profession</string>
-    <string name="form_design_experience">Design Experience</string>
+    <string name="form_design_experience">Design Experience:</string>
     <string name="form_accept">Accept</string>
+    <string name="profession_non_programmer">Non Programmer</string>
 
+
+    <string name="no_experience">No experience</string>
+    <string name="less_than_year">Less than year</string>
+    <string name="one_two_years">1 – 2 years</string>
+    <string name="two_tree_years">2 – 3 years</string>
+    <string name="more_than_three">More than 3 years</string>
     <!-- Arrays -->
 
     <string-array name="professions">
+        <item>@string/profession_non_programmer</item>
         <item>Backend Developer</item>
         <item>Designer</item>
         <item>Frontend developer</item>
         <item>Mobile Developer</item>
         <item>Analyst</item>
         <item>Working with people</item>
-        <item>Other</item>
 
 
     </string-array>
