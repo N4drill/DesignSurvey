@@ -14,6 +14,8 @@ import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Acti
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Command
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapter
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackLayoutManager
+import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener
+import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent.OnCardDisappeared
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.exhaustivePatternCheck
 import com.example.androidsampleconfiguration.databinding.FragmentMasterBinding
@@ -37,6 +39,10 @@ class MasterFragment : DaggerFragment() {
         ViewModelProviders.of(this@MasterFragment, factory).get(MasterViewModel::class.java)
     }
 
+    private val surveyCardStackListener by lazy {
+        SurveyCardStackListener()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +51,7 @@ class MasterFragment : DaggerFragment() {
         viewModel.observeViewModel()
         initBinding()
         setupCardStack()
+        observeListenerEvents()
         Timber.d("Master Fragment created")
     }.root
 
@@ -54,9 +61,19 @@ class MasterFragment : DaggerFragment() {
 
     private fun FragmentMasterBinding.setupCardStack() {
         cardStack.apply {
-            layoutManager = SurveyCardStackLayoutManager(context)
+            layoutManager = SurveyCardStackLayoutManager(context, surveyCardStackListener)
             adapter = surveyAdapter
         }
+    }
+
+    private fun observeListenerEvents() {
+        surveyCardStackListener.listenerEvents
+            .subscribe({ event ->
+                when (event) {
+                    OnCardDisappeared -> Timber.d("MYCARD disappeared :D")
+                }.exhaustivePatternCheck()
+            }, { Timber.e(it, "Something went wrong observing LISTENER EVENTS") })
+            .addTo(compositeDisposable)
     }
 
     private fun MasterViewModel.observeViewModel() {

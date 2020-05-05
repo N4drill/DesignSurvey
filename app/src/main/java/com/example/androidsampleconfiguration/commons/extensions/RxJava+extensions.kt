@@ -13,10 +13,10 @@ fun Disposable.addTo(compositeDisposable: CompositeDisposable) {
     compositeDisposable.add(this)
 }
 
-fun <T> PublishSubject<T>.observerOnMain(): Observable<T> =
+fun <T> PublishSubject<T>.observeOnMain(): Observable<T> =
     observeOn(AndroidSchedulers.mainThread())
 
-fun <T> BehaviorSubject<T>.observerOnMain(): Observable<T> =
+fun <T> BehaviorSubject<T>.observeOnMain(): Observable<T> =
     observeOn(AndroidSchedulers.mainThread())
 
 fun <T> Observable<T>.subscribeOnComputation(): Observable<T> =

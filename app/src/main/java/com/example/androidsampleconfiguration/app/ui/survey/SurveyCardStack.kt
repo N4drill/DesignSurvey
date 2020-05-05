@@ -9,12 +9,16 @@ import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapt
 import com.example.androidsampleconfiguration.commons.extensions.autoNotify
 import com.example.androidsampleconfiguration.databinding.ItemQuestionBinding
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.StackFrom
 import com.yuyakaido.android.cardstackview.SwipeableMethod
+import timber.log.Timber
 import kotlin.properties.Delegates
 
-class SurveyCardStackLayoutManager(context: Context) : CardStackLayoutManager(context) {
+class SurveyCardStackLayoutManager(context: Context, cardStackListener: CardStackListener) :
+    CardStackLayoutManager(context, cardStackListener) {
+
     init {
         setStackFrom(StackFrom.Top)
         setVisibleCount(2)
@@ -26,6 +30,7 @@ class SurveyCardStackLayoutManager(context: Context) : CardStackLayoutManager(co
         setCanScrollHorizontal(true)
         setCanScrollVertical(true)
         setSwipeableMethod(SwipeableMethod.Manual)
+        Timber.d("MY NEW CARD STACK LISTENER: $cardStackListener")
     }
 }
 

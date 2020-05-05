@@ -8,7 +8,6 @@ import com.example.androidsampleconfiguration.app.presentation.toQuestions
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.observeOnMain
-import com.example.androidsampleconfiguration.commons.extensions.observerOnMain
 import com.example.androidsampleconfiguration.commons.extensions.subscribeOnIO
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -32,11 +31,11 @@ class MasterViewModel @Inject constructor(
 
     // -- Streams
     val actions: Observable<Action>
-        get() = actionSubject.observerOnMain()
+        get() = actionSubject.observeOnMain()
     val commands: Observable<Command>
-        get() = commandSubject.observerOnMain()
+        get() = commandSubject.observeOnMain()
     val questions: Observable<List<Question>>
-        get() = questionsSubject.observerOnMain()
+        get() = questionsSubject.observeOnMain()
 
     init {
         getNotAnsweredQuestions.execute()
