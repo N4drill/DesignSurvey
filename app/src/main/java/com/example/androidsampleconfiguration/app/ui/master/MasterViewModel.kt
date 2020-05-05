@@ -2,7 +2,7 @@ package com.example.androidsampleconfiguration.app.ui.master
 
 import androidx.lifecycle.AndroidViewModel
 import com.example.androidsampleconfiguration.app.App
-import com.example.androidsampleconfiguration.app.dataaccess.repository.QuestionRepository
+import com.example.androidsampleconfiguration.app.domain.GetNotAnsweredQuestions
 import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.presentation.toQuestions
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class MasterViewModel @Inject constructor(
     application: App,
-    questionRepository: QuestionRepository,
+    private val getNotAnsweredQuestions: GetNotAnsweredQuestions,
     private val masterFragment: MasterFragment
 ) : AndroidViewModel(application) {
 
@@ -39,7 +39,7 @@ class MasterViewModel @Inject constructor(
         get() = questionsSubject.observerOnMain()
 
     init {
-        questionRepository.getAll()
+        getNotAnsweredQuestions.execute()
             .subscribeOnIO()
             .observeOnMain()
             .doAfterSuccess {
