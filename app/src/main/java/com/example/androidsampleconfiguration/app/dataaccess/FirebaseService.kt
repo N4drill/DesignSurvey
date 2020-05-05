@@ -38,6 +38,7 @@ class FirebaseService @Inject constructor(
             toInsert["age"] = age
             toInsert["profession"] = profession
             toInsert["designExperience"] = designExperience
+            toInsert["answeredQuestions"] = answeredQuestions
         }
 
         val usersRef = firestore.collection(USER_COLLECTION)

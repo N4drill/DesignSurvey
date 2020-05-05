@@ -40,7 +40,8 @@ class FormActivity : DaggerAppCompatActivity() {
             gender = DEFAULT_GENDER,
             age = DEFAULT_AGE,
             designExperience = DEFAULT_EXP,
-            profession = DEFAULT_PROFESSION
+            profession = DEFAULT_PROFESSION,
+            answeredQuestions = DEFAULT_ANSWERED_QUESTIONS
         )
     ) { _, _, new ->
         new.printInfo("New UserModel")
@@ -175,8 +176,6 @@ class FormActivity : DaggerAppCompatActivity() {
             }
 
         }
-
-        // TODO: SETUP ON CLICK UPDATE MODEL
     }
 
     private fun ActivityFormBinding.changeGenderAppearance() {
@@ -224,6 +223,7 @@ class FormActivity : DaggerAppCompatActivity() {
         private const val DEFAULT_AGE = 20
         private const val DEFAULT_PROFESSION = "Non Programmer" // TODO: Update to get this from resources
         private const val DEFAULT_EXP = 0
+        private val DEFAULT_ANSWERED_QUESTIONS = listOf<String>()
 
     }
 }
@@ -236,7 +236,8 @@ data class UserModel(
     val gender: Gender,
     val age: Int,
     val profession: String,
-    val designExperience: Int
+    val designExperience: Int,
+    val answeredQuestions: List<String>
 ) {
 
     enum class Gender {

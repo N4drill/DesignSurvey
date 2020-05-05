@@ -8,7 +8,8 @@ data class UserFirestore(
     val gender: String = "",
     val age: Int = 20,
     val profession: String = "Non Programmer",
-    val designExperience: Int = 0
+    val designExperience: Int = 0,
+    val answeredQuestions: ArrayList<String> = arrayListOf()
 )
 
 fun UserModel.toUserFirestore(): UserFirestore = UserFirestore(
@@ -18,5 +19,6 @@ fun UserModel.toUserFirestore(): UserFirestore = UserFirestore(
     },
     age = age,
     profession = profession,
-    designExperience = designExperience
+    designExperience = designExperience,
+    answeredQuestions = ArrayList(answeredQuestions)
 )
