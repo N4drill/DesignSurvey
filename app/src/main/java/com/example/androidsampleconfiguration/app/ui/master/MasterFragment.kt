@@ -15,7 +15,6 @@ import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Comm
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapter
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackLayoutManager
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener
-import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent.OnCardDisappeared
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.exhaustivePatternCheck
 import com.example.androidsampleconfiguration.databinding.FragmentMasterBinding
@@ -68,10 +67,8 @@ class MasterFragment : DaggerFragment() {
 
     private fun observeListenerEvents() {
         surveyCardStackListener.listenerEvents
-            .subscribe({ event ->
-                when (event) {
-                    OnCardDisappeared -> Timber.d("MYCARD disappeared :D")
-                }.exhaustivePatternCheck()
+            .subscribe({
+                viewModel.onListenerEvent(it)
             }, { Timber.e(it, "Something went wrong observing LISTENER EVENTS") })
             .addTo(compositeDisposable)
     }

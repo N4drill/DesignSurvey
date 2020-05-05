@@ -1,5 +1,6 @@
 package com.example.androidsampleconfiguration.app.dataaccess
 
+import com.example.androidsampleconfiguration.app.dataaccess.model.AnswerFirestore
 import com.example.androidsampleconfiguration.app.dataaccess.model.AspectFirestore
 import com.example.androidsampleconfiguration.app.dataaccess.model.QuestionFirestore
 import com.example.androidsampleconfiguration.app.dataaccess.model.TypeFirestore
@@ -50,6 +51,23 @@ class FirebaseService @Inject constructor(
             Timber.d("Retrieved user with id: $userId.")
         }.getSingle()
 
+    fun insertAnswer(answerFirestore: AnswerFirestore): Single<DocumentReference> {
+        val toInsert = HashMap<String, Any>()
+        with(answerFirestore) {
+            toInsert["question"] = questionId
+            toInsert["time"] = answerTime
+            toInsert["dragtime"] = dragToAnswerTime
+            toInsert["directionchangecount"] = directionChangesCount
+            toInsert["dragfails"] = dragFails
+            toInsert["firstdecision"] = firstDecision
+            toInsert["finaldecision"] = finalDecision
+            toInsert["user"] = requireNotNull(user)
+        }
+
+        val answerRef = firestore.collection(ANSWER_COLLECTION)
+        return answerRef.addDocumentSingle(toInsert)
+    }
+
     private fun CollectionReference.getQuestionsSingle(): Single<List<QuestionFirestore>> = Single.create { emitter ->
         get()
             .addOnSuccessListener {
@@ -72,5 +90,6 @@ class FirebaseService @Inject constructor(
         private const val ASPECT_COLLECTION = "Aspect"
         private const val TYPE_COLLECTION = "Type"
         private const val USER_COLLECTION = "User"
+        private const val ANSWER_COLLECTION = "Answer"
     }
 }
