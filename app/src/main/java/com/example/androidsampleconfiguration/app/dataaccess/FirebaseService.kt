@@ -4,6 +4,7 @@ import com.example.androidsampleconfiguration.app.dataaccess.model.AspectFiresto
 import com.example.androidsampleconfiguration.app.dataaccess.model.QuestionFirestore
 import com.example.androidsampleconfiguration.app.dataaccess.model.TypeFirestore
 import com.example.androidsampleconfiguration.app.dataaccess.model.UserFirestore
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import de.aaronoe.rxfirestore.addDocumentSingle
@@ -18,7 +19,7 @@ class FirebaseService @Inject constructor(
 
     fun getAllQuestions(): Single<List<QuestionFirestore>> = firestore.collection(QUESTION_COLLECTION).also {
         Timber.d("Running getAllQuestions")
-    }.getSingle()
+    }.getQuestionsSingle()
 
     fun getAspect(aspectReference: DocumentReference): Single<AspectFirestore> =
         firestore.collection(ASPECT_COLLECTION).document(aspectReference.path.split("/")[1]).also {
@@ -41,6 +42,23 @@ class FirebaseService @Inject constructor(
 
         val usersRef = firestore.collection(USER_COLLECTION)
         return usersRef.addDocumentSingle(toInsert)
+    }
+
+    private fun CollectionReference.getQuestionsSingle(): Single<List<QuestionFirestore>> = Single.create { emitter ->
+        get()
+            .addOnSuccessListener {
+                try {
+                    val results = mutableListOf<QuestionFirestore>()
+                    it.forEach { document ->
+                        val res = document.toObject(QuestionFirestore::class.java)
+                        results.add(res.copy(id = document.id))
+                    }
+                    emitter.onSuccess(results)
+                } catch (e: Exception) {
+                    emitter.onError(e)
+                }
+            }
+            .addOnFailureListener { emitter.onError(it) }
     }
 
     companion object {
