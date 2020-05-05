@@ -15,4 +15,6 @@ class UserRepository @Inject constructor(
     fun insert(userModel: UserModel): Single<DocumentReference> = firebaseService.insertUser(userModel.toUserFirestore())
 
     fun get(userId: String): Single<UserModel> = firebaseService.getUser(userId = userId).map { it.toUserModel() }
+
+    fun checkUserExists(userId: String): Single<Boolean> = firebaseService.checkUserExists(userId = userId)
 }

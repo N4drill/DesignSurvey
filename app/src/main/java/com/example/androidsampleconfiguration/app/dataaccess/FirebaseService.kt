@@ -51,6 +51,9 @@ class FirebaseService @Inject constructor(
             Timber.d("Retrieved user with id: $userId.")
         }.getSingle()
 
+    fun checkUserExists(userId: String): Single<Boolean> =
+        firestore.collection(USER_COLLECTION).document(userId).getDocumentExists()
+
     fun insertAnswer(answerFirestore: AnswerFirestore): Single<DocumentReference> {
         val toInsert = HashMap<String, Any>()
         with(answerFirestore) {
@@ -66,6 +69,14 @@ class FirebaseService @Inject constructor(
 
         val answerRef = firestore.collection(ANSWER_COLLECTION)
         return answerRef.addDocumentSingle(toInsert)
+    }
+
+    fun DocumentReference.getDocumentExists(): Single<Boolean> = Single.create { emitter ->
+        get()
+            .addOnSuccessListener {
+                emitter.onSuccess(it.exists())
+            }
+            .addOnFailureListener { emitter.onError(it) }
     }
 
     private fun CollectionReference.getQuestionsSingle(): Single<List<QuestionFirestore>> = Single.create { emitter ->
