@@ -45,6 +45,11 @@ class FirebaseService @Inject constructor(
         return usersRef.addDocumentSingle(toInsert)
     }
 
+    fun getUser(userId: String): Single<UserFirestore> =
+        firestore.collection(USER_COLLECTION).document(userId).also {
+            Timber.d("Retrieved user with id: $userId.")
+        }.getSingle()
+
     private fun CollectionReference.getQuestionsSingle(): Single<List<QuestionFirestore>> = Single.create { emitter ->
         get()
             .addOnSuccessListener {

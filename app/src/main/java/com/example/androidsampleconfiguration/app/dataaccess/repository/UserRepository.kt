@@ -2,6 +2,7 @@ package com.example.androidsampleconfiguration.app.dataaccess.repository
 
 import com.example.androidsampleconfiguration.app.dataaccess.FirebaseService
 import com.example.androidsampleconfiguration.app.dataaccess.model.toUserFirestore
+import com.example.androidsampleconfiguration.app.dataaccess.model.toUserModel
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel
 import com.google.firebase.firestore.DocumentReference
 import io.reactivex.Single
@@ -12,4 +13,6 @@ class UserRepository @Inject constructor(
 ) {
 
     fun insert(userModel: UserModel): Single<DocumentReference> = firebaseService.insertUser(userModel.toUserFirestore())
+
+    fun get(userId: String): Single<UserModel> = firebaseService.getUser(userId = userId).map { it.toUserModel() }
 }

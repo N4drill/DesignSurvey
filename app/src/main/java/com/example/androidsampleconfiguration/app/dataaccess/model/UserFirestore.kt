@@ -12,6 +12,20 @@ data class UserFirestore(
     val answeredQuestions: ArrayList<String> = arrayListOf()
 )
 
+fun UserFirestore.toUserModel(): UserModel = UserModel(
+    gender = requireNotNull(
+        when (gender) {
+            "male" -> MALE
+            "female" -> FEMALE
+            else -> null
+        }
+    ),
+    age = age,
+    profession = profession,
+    designExperience = designExperience,
+    answeredQuestions = answeredQuestions.toList()
+)
+
 fun UserModel.toUserFirestore(): UserFirestore = UserFirestore(
     gender = when (gender) {
         MALE -> "male"
