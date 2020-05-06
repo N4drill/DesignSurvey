@@ -2,7 +2,7 @@ package com.example.androidsampleconfiguration.app.dataaccess.repository
 
 import com.example.androidsampleconfiguration.app.dataaccess.FirebaseService
 import com.example.androidsampleconfiguration.app.dataaccess.model.toAnswerFirestore
-import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.AnswerModel
+import com.example.androidsampleconfiguration.app.domain.AnswerModel
 import com.google.firebase.firestore.DocumentReference
 import io.reactivex.Single
 import javax.inject.Inject

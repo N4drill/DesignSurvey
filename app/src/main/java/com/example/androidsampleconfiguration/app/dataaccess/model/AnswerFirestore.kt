@@ -1,6 +1,6 @@
 package com.example.androidsampleconfiguration.app.dataaccess.model
 
-import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.AnswerModel
+import com.example.androidsampleconfiguration.app.domain.AnswerModel
 import com.google.firebase.firestore.PropertyName
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.Direction.Left

@@ -21,7 +21,7 @@ class SurveyCardStackListener : CardStackListener {
         get() = listenerEmitter.observeOnMain()
 
     override fun onCardDisappeared(view: View, position: Int) {
-        OnDisappeared(position).addEvent()
+        OnDisappeared(position).addEvent().logInfo()
     }
 
     override fun onCardDragging(direction: Direction, ratio: Float) {
@@ -29,19 +29,19 @@ class SurveyCardStackListener : CardStackListener {
     }
 
     override fun onCardSwiped(direction: Direction) {
-        OnSwiped(direction).addEvent()
+        OnSwiped(direction).addEvent().logInfo()
     }
 
     override fun onCardCanceled() {
-        OnCanceled.addEvent()
+        OnCanceled.addEvent().logInfo()
     }
 
     override fun onCardAppeared(view: View, position: Int) {
-        OnAppeared(position).addEvent()
+        OnAppeared(position).addEvent().logInfo()
     }
 
     override fun onCardRewound() {
-        OnRewound.addEvent()
+        OnRewound.addEvent().logInfo()
     }
 
     sealed class CardListenerEvent {
@@ -53,8 +53,12 @@ class SurveyCardStackListener : CardStackListener {
         object OnRewound : CardListenerEvent()
     }
 
-    private fun CardListenerEvent.addEvent() {
+    private fun CardListenerEvent.addEvent() : CardListenerEvent{
         listenerEmitter.onNext(this)
+        return this
+    }
+
+    private fun CardListenerEvent.logInfo() {
         Timber.d("Listener Event : ${javaClass.simpleName} triggered !")
     }
 }

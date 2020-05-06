@@ -10,6 +10,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import de.aaronoe.rxfirestore.addDocumentSingle
 import de.aaronoe.rxfirestore.getSingle
+import de.aaronoe.rxfirestore.updateDocumentCompletable
+import io.reactivex.Completable
 import io.reactivex.Single
 import timber.log.Timber
 import javax.inject.Inject
@@ -51,6 +53,11 @@ class FirebaseService @Inject constructor(
             Timber.d("Retrieved user with id: $userId.")
         }.getSingle()
 
+    fun updateAlreadyAnswer(userId: String, alreadyAnswered: List<String>): Completable {
+        return firestore.collection(USER_COLLECTION).document(userId)
+            .updateDocumentCompletable("answeredQuestions", ArrayList(alreadyAnswered))
+    }
+
     fun checkUserExists(userId: String): Single<Boolean> =
         firestore.collection(USER_COLLECTION).document(userId).getDocumentExists()
 
@@ -71,7 +78,7 @@ class FirebaseService @Inject constructor(
         return answerRef.addDocumentSingle(toInsert)
     }
 
-    fun DocumentReference.getDocumentExists(): Single<Boolean> = Single.create { emitter ->
+    private fun DocumentReference.getDocumentExists(): Single<Boolean> = Single.create { emitter ->
         get()
             .addOnSuccessListener {
                 emitter.onSuccess(it.exists())

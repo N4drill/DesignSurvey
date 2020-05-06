@@ -2,9 +2,11 @@ package com.example.androidsampleconfiguration.app.ui.master
 
 import androidx.lifecycle.AndroidViewModel
 import com.example.androidsampleconfiguration.app.App
+import com.example.androidsampleconfiguration.app.dataaccess.repository.UserRepository
 import com.example.androidsampleconfiguration.app.domain.GetCurrentUser
 import com.example.androidsampleconfiguration.app.domain.GetNotAnsweredQuestions
 import com.example.androidsampleconfiguration.app.domain.InsertAnswer
+import com.example.androidsampleconfiguration.app.domain.SharedPreferenceManager
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.presentation.toQuestions
@@ -33,7 +35,9 @@ import javax.inject.Inject
 class MasterViewModel @Inject constructor(
     application: App,
     getNotAnsweredQuestions: GetNotAnsweredQuestions,
-    getCurrentUser: GetCurrentUser,
+    private val getCurrentUser: GetCurrentUser,
+    private val sharedPreferenceManager: SharedPreferenceManager,
+    private val userRepository: UserRepository,
     private val insertAnswer: InsertAnswer,
     private val masterFragment: MasterFragment
 ) : AndroidViewModel(application) {
@@ -62,6 +66,8 @@ class MasterViewModel @Inject constructor(
     private var failedToSwap = DEFAULT_FAILED_TO_SWAP
     private var firstDirection: Direction? = null
     private var currentSwapDirection: Direction? = null
+
+    private var nextReserved: Int = 0
 
     init {
         getCurrentUser.execute() // TODO: Refactor ???
@@ -152,7 +158,9 @@ class MasterViewModel @Inject constructor(
 
     private fun onAppeared(event: OnAppeared) {
         Timber.d("SURVEY: New question appeared")
-        currentQuestion = availableQuestions[event.position]
+        nextReserved = event.position
+//        currentQuestion = availableQuestions[event.position]
+//        Timber.d("SURVEY: Current question is now ${currentQuestion.id}, position: ${event.position}")
 
         startNewQuestion()
     }
@@ -172,9 +180,8 @@ class MasterViewModel @Inject constructor(
         val answerTime = currentTime - startQuestionTime
         val lastDraggingTime = currentTime - startDraggingTime
 
-        val model = AnswerModel(
+        val model = AnswerData(
             questionId = currentQuestion.id,
-            user = currentUser,
             answerTime = answerTime,
             dragToAnswerTime = lastDraggingTime,
             dragFails = failedToSwap,
@@ -183,25 +190,28 @@ class MasterViewModel @Inject constructor(
             swapDirectionChangesCount = swapDirectionChanged
         )
 
-        insertAnswer.execute(model)
-            .subscribeOnIO()
-            .observeOnMain()
-            .subscribe({
-                Timber.d("New Answer, inserted answer and get new id: ${it.id}")
-            }, { Timber.e(it, "Error while inserting new answer") })
+        getCurrentUser.execute()
+            .flatMap { user ->
+                insertAnswer.execute(model, user).map { user }
+            }.flatMapCompletable { user ->
+                userRepository.updateAnswers(
+                    sharedPreferenceManager.getUserId()!!,
+                    user.answeredQuestions + currentQuestion.id
+                )
+            }.subscribe({
+                currentQuestion = availableQuestions[nextReserved]
+            }, { Timber.e(it, "Something went wrong while inserting new answer") })
             .addTo(compositeDisposable)
-
     }
 
-    data class AnswerModel(
+    data class AnswerData(
         val questionId: String,
         val answerTime: Long,
         val dragToAnswerTime: Long,
         val dragFails: Int,
         val swapDirectionChangesCount: Int,
         val firstDecision: Direction,
-        val finalDecision: Direction,
-        val user: UserModel
+        val finalDecision: Direction
     )
 
     //region Actions and Commands
