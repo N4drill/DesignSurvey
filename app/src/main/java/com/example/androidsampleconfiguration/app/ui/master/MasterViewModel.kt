@@ -154,6 +154,7 @@ class MasterViewModel @Inject constructor(
 
     private fun onSwiped(event: OnSwiped) {
         Timber.d("SURVEY: Question swiped: ${event.direction}")
+        currentQuestion = availableQuestions[nextReserved]
         actionSubject.onNext(QuestionSwiped(currentQuestion))
 //        sendAnswer()
     }

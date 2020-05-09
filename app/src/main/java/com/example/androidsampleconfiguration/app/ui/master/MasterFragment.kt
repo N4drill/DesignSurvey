@@ -90,18 +90,18 @@ class MasterFragment : DaggerFragment() {
 
         commands
             .subscribe({
-                //                when (it) {
-//                }.exhaustivePatternCheck()
             }, { Timber.d(it, "Something went wrong observing COMMANDS") })
             .addTo(compositeDisposable)
     }
 
     private fun onQuestionSwiped(question: QuestionEntity) {
         if (question.aspects.isEmpty()) {
-            viewModel.sendAnswer(aspectsSelected = emptyList())
+//            viewModel.sendAnswer(aspectsSelected = emptyList())
         } else {
             val navController = findNavController()
-            navController.navigate(R.id.action_masterFragment_to_aspectsDialogFragment)
+            navController.navigate(
+                R.id.action_masterFragment_to_aspectsDialogFragment
+            )
         }
     }
 

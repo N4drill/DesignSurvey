@@ -24,6 +24,7 @@
     <string name="more_than_three">More than 3 years</string>
     <string name="info_swipe_left">Swipe left if dislake</string>
     <string name="info_swipe_right">Swipe right if like</string>
+    <string name="aspects_title">Why did you decided like that?</string>
     <!-- Arrays -->
 
     <string-array name="professions">

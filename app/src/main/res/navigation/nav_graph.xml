@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/masterFragment">
 
     <fragment
         android:id="@+id/masterFragment"
         android:name="com.example.androidsampleconfiguration.app.ui.master.MasterFragment"
-        android:label="MasterFragment" >
+        android:label="MasterFragment">
         <action
             android:id="@+id/action_masterFragment_to_aspectsDialogFragment"
             app:destination="@id/aspectsDialogFragment" />
@@ -17,6 +18,6 @@
         android:name="com.example.androidsampleconfiguration.app.ui.master.AspectsDialog">
         <action
             android:id="@+id/myaction"
-            app:destination="@+id/masterFragment"/>
+            app:destination="@+id/masterFragment" />
     </dialog>
 </navigation>

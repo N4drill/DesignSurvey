@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_aspect_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:background="@drawable/item_aspect_background_not_selected"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="@dimen/padding_default"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_big"
+        tools:text="ASPECT_PLACEHOLDER">
+
+    </TextView>
+</layout>
