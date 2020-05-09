@@ -11,6 +11,7 @@ import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.presentation.toQuestions
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.QuestionSwiped
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent.OnAppeared
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent.OnCanceled
@@ -153,7 +154,8 @@ class MasterViewModel @Inject constructor(
 
     private fun onSwiped(event: OnSwiped) {
         Timber.d("SURVEY: Question swiped: ${event.direction}")
-        sendAnswer()
+        actionSubject.onNext(QuestionSwiped(currentQuestion))
+//        sendAnswer()
     }
 
     private fun onAppeared(event: OnAppeared) {
@@ -172,7 +174,7 @@ class MasterViewModel @Inject constructor(
 
     private fun onRewound() {}
 
-    private fun sendAnswer() {
+    fun sendAnswer(aspectsSelected: List<String>) {
         val currentTime = currentTimeMillis()
         val answerTime = currentTime - startQuestionTime
         val lastDraggingTime = currentTime - startDraggingTime
@@ -215,14 +217,10 @@ class MasterViewModel @Inject constructor(
     sealed class Action {
 
         object ItemsLoaded : Action()
-        data class SampleAction(val data: String) : Action()
-        object SampleObjectAction : Action()
+        data class QuestionSwiped(val question: QuestionEntity) : Action()
     }
 
-    sealed class Command {
-        data class SampleCommand(val data: String) : Command()
-        object SampleObjectCommand : Command()
-    }
+    sealed class Command
     //endregion
 
     override fun onCleared() {

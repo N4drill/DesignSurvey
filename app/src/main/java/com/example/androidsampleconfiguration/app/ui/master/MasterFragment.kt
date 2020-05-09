@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.androidsampleconfiguration.R
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.app.ui.DaggerViewModelFactory
-import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
-import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SampleAction
-import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SampleObjectAction
-import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Command
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.QuestionSwiped
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapter
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackLayoutManager
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener
@@ -84,20 +83,26 @@ class MasterFragment : DaggerFragment() {
             .subscribe({
                 when (it) {
                     ItemsLoaded -> onItemsLoaded()
-                    is SampleAction -> onAction(it)
-                    SampleObjectAction -> onAction(it)
+                    is QuestionSwiped -> onQuestionSwiped(question = it.question)
                 }.exhaustivePatternCheck()
             }, { Timber.d(it, "Something went wrong observing ACTION") })
             .addTo(compositeDisposable)
 
         commands
             .subscribe({
-                when (it) {
-                    is Command.SampleCommand -> onCommand(it)
-                    Command.SampleObjectCommand -> onCommand(it)
-                }.exhaustivePatternCheck()
+                //                when (it) {
+//                }.exhaustivePatternCheck()
             }, { Timber.d(it, "Something went wrong observing COMMANDS") })
             .addTo(compositeDisposable)
+    }
+
+    private fun onQuestionSwiped(question: QuestionEntity) {
+        if (question.aspects.isEmpty()) {
+            viewModel.sendAnswer(aspectsSelected = emptyList())
+        } else {
+            val navController = findNavController()
+            navController.navigate(R.id.action_masterFragment_to_aspectsDialogFragment)
+        }
     }
 
     private fun onItemsLoaded() {
@@ -105,9 +110,6 @@ class MasterFragment : DaggerFragment() {
         binding.tvMessage.text = getString(R.string.thanks_message)
         binding.tvMessage.visibility = View.VISIBLE
     }
-
-    private fun onAction(action: Action) {}
-    private fun onCommand(command: Command) {}
 
     override fun onDestroy() {
         super.onDestroy()
