@@ -2,16 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="selected"
+            type="boolean" />
+    </data>
+
     <TextView
         android:id="@+id/tv_aspect_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_default"
-        android:background="@drawable/item_aspect_background_not_selected"
+        android:background="@{selected ? @drawable/item_aspect_background_selected : @drawable/item_aspect_background_not_selected}"
         android:fontFamily="sans-serif-condensed"
         android:padding="@dimen/padding_default"
         android:textAlignment="center"
         android:textSize="@dimen/font_big"
+        android:textColor="@{selected ? @android:color/white : @color/text_color}"
         tools:text="ASPECT_PLACEHOLDER">
 
     </TextView>
