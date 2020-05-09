@@ -159,9 +159,6 @@ class MasterViewModel @Inject constructor(
     private fun onAppeared(event: OnAppeared) {
         Timber.d("SURVEY: New question appeared")
         nextReserved = event.position
-//        currentQuestion = availableQuestions[event.position]
-//        Timber.d("SURVEY: Current question is now ${currentQuestion.id}, position: ${event.position}")
-
         startNewQuestion()
     }
 
