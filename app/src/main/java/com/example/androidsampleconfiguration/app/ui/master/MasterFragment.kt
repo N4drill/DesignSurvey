@@ -99,9 +99,8 @@ class MasterFragment : DaggerFragment() {
 //            viewModel.sendAnswer(aspectsSelected = emptyList())
         } else {
             val navController = findNavController()
-            navController.navigate(
-                R.id.action_masterFragment_to_aspectsDialogFragment
-            )
+            val action = MasterFragmentDirections.masterToDialog(question.aspects.map { it.title }.toTypedArray())
+            navController.navigate(action)
         }
     }
 

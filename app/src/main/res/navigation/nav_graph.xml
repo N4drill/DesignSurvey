@@ -9,15 +9,19 @@
         android:name="com.example.androidsampleconfiguration.app.ui.master.MasterFragment"
         android:label="MasterFragment">
         <action
-            android:id="@+id/action_masterFragment_to_aspectsDialogFragment"
-            app:destination="@id/aspectsDialogFragment" />
+            android:id="@+id/masterToDialog"
+            app:destination="@id/dialogAspects" />
     </fragment>
 
     <dialog
-        android:id="@+id/aspectsDialogFragment"
+        android:id="@+id/dialogAspects"
         android:name="com.example.androidsampleconfiguration.app.ui.master.AspectsDialog">
         <action
             android:id="@+id/myaction"
             app:destination="@+id/masterFragment" />
+
+        <argument
+            android:name="aspects"
+            app:argType="string[]" />
     </dialog>
 </navigation>

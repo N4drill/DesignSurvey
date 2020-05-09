@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.Aspect
@@ -16,7 +17,9 @@ import timber.log.Timber
 import kotlin.properties.Delegates
 
 class AspectsDialog : DaggerDialogFragment(), AspectListener {
-    lateinit var aspectAdapter: AspectAdapter
+    private lateinit var aspectAdapter: AspectAdapter
+
+    val args: AspectsDialogArgs by navArgs()
 
     override fun aspectClicked(aspect: Aspect) {
         Timber.d("Aspect ${aspect.title} clicked")
@@ -31,7 +34,8 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         DialogAspectsBinding.inflate(inflater, container, false).apply {
-            setupRecycler(listOf("COLOR", "OTHER1", "OTHER3"))
+            val aspects = args.aspects
+            setupRecycler(aspects.toList())
         }.root
 
     private fun DialogAspectsBinding.setupRecycler(aspects: List<String>) {
@@ -43,7 +47,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
     }
 }
 
-fun List<String>.toAspects(): List<Aspect> = map { Aspect(title = it, selected = false) }
+fun List<String>.toAspects(): List<Aspect> = map { Aspect(title = it.capitalize(), selected = false) }
 
 class AspectAdapter(private val aspectListener: AspectListener) :
     RecyclerView.Adapter<AspectAdapter.AspectViewHolder>() {
