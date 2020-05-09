@@ -23,8 +23,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash_background"
         android:padding="@dimen/padding_big"
+        android:background="@drawable/splash_background"
         tools:context=".app.ui.userform.FormActivity">
 
         <TextView
@@ -50,7 +50,7 @@
             android:gravity="bottom|left"
             android:padding="@dimen/padding_tiny"
             android:text="@string/label_sex"
-            android:textSize="@dimen/font_normal"
+            android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toTopOf="@id/s_gender"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -101,7 +101,7 @@
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
             android:text="@string/form_age"
-            android:textSize="@dimen/font_normal"
+            android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toTopOf="@id/seek_age"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/s_gender" />
@@ -114,7 +114,7 @@
             android:layout_marginLeft="@dimen/margin_default"
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
-            android:textSize="@dimen/font_normal"
+            android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toBottomOf="@id/age_label"
             app:layout_constraintLeft_toRightOf="@id/age_label"
             tools:text="20" />
@@ -137,7 +137,7 @@
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
             android:text="@string/form_profession"
-            android:textSize="@dimen/font_normal"
+            android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toTopOf="@id/spinner_profession"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/seek_age" />
@@ -147,6 +147,7 @@
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
             android:textSize="@dimen/font_normal"
+            android:background="@drawable/spinner_style"
             app:layout_constraintBottom_toTopOf="@id/design_exp_label"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -159,8 +160,9 @@
             android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
+
             android:text="@string/form_design_experience"
-            android:textSize="@dimen/font_normal"
+            android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toTopOf="@id/seek_exp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinner_profession" />
@@ -171,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_default"
             android:fontFamily="sans-serif-condensed"
-            android:textSize="@dimen/font_normal"
+            android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toBottomOf="@id/design_exp_label"
             app:layout_constraintLeft_toRightOf="@id/design_exp_label"
             tools:text="4" />
@@ -188,12 +190,15 @@
 
         <Button
             android:id="@+id/btn_accept"
+            android:background="@drawable/button_background"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
             android:layout_marginTop="@dimen/padding_default"
             android:text="@string/form_accept"
+            android:shadowColor="@android:color/transparent"
             android:textAllCaps="false"
-            android:textSize="@dimen/font_normal"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_double"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

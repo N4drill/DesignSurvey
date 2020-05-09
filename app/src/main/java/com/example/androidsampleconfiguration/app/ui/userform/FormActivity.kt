@@ -161,9 +161,9 @@ class FormActivity : DaggerAppCompatActivity() {
 
     private fun ActivityFormBinding.setupProfessionSpinner() {
         val adapter = ArrayAdapter.createFromResource(
-            this@FormActivity, R.array.professions, android.R.layout.simple_spinner_item
+            this@FormActivity, R.array.professions, R.layout.item_spinner
         ).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            setDropDownViewResource(R.layout.item_spinner)
         }
         spinnerProfession.adapter = adapter
         spinnerProfession.onItemSelectedListener = object : OnItemSelectedListener {
