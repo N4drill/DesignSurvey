@@ -20,13 +20,13 @@ class SurveyCardStackLayoutManager(context: Context, cardStackListener: CardStac
     CardStackLayoutManager(context, cardStackListener) {
 
     init {
-        setStackFrom(StackFrom.Top)
-        setVisibleCount(2)
-        setTranslationInterval(4.0f)
+        setStackFrom(StackFrom.Left)
+        setVisibleCount(3)
+        setTranslationInterval(12.0f)
         setScaleInterval(0.75f)
         setMaxDegree(40.0f)
         setDirections(Direction.HORIZONTAL)
-        setSwipeThreshold(0.9f)
+        setSwipeThreshold(0.75f)
         setCanScrollHorizontal(true)
         setCanScrollVertical(true)
         setSwipeableMethod(SwipeableMethod.Manual)
