@@ -11,7 +11,7 @@
 
     <TextView
         android:id="@+id/tv_aspect_name"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_default"
         android:background="@{selected ? @drawable/item_aspect_background_selected : @drawable/item_aspect_background_not_selected}"

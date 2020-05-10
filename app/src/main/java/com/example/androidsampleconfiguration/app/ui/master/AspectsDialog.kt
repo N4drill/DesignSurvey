@@ -34,9 +34,16 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         DialogAspectsBinding.inflate(inflater, container, false).apply {
-            val aspects = args.aspects
-            setupRecycler(aspects.toList())
+            setupRecycler(args.aspects.toList())
+            setupLayout()
         }.root
+
+    private fun DialogAspectsBinding.setupLayout() {
+        btnAspectsAccept.setOnClickListener {
+            val result = aspectAdapter.items.filter { it.selected }.map { it.title }
+            Timber.d("I would save only those: $result")
+        }
+    }
 
     private fun DialogAspectsBinding.setupRecycler(aspects: List<String>) {
         rvAspectsRecycler.apply {
