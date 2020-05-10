@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.Aspect
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.AspectListener
 import com.example.androidsampleconfiguration.commons.extensions.autoNotify
@@ -14,10 +16,15 @@ import com.example.androidsampleconfiguration.databinding.DialogAspectsBinding
 import com.example.androidsampleconfiguration.databinding.ItemAspectBinding
 import dagger.android.support.DaggerDialogFragment
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
 class AspectsDialog : DaggerDialogFragment(), AspectListener {
+
     private lateinit var aspectAdapter: AspectAdapter
+
+    @Inject
+    lateinit var aspectObserver: AspectObserver
 
     val args: AspectsDialogArgs by navArgs()
 
@@ -41,7 +48,8 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
     private fun DialogAspectsBinding.setupLayout() {
         btnAspectsAccept.setOnClickListener {
             val result = aspectAdapter.items.filter { it.selected }.map { it.title }
-            Timber.d("I would save only those: $result")
+            aspectObserver.aspectsSubject.onNext(result)
+            findNavController().navigateUp()
         }
     }
 
@@ -52,6 +60,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
         }
         aspectAdapter.items = aspects.toAspects()
     }
+
 }
 
 fun List<String>.toAspects(): List<Aspect> = map { Aspect(title = it.capitalize(), selected = false) }

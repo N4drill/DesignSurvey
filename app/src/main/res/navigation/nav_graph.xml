@@ -11,13 +11,14 @@
         <action
             android:id="@+id/masterToDialog"
             app:destination="@id/dialogAspects" />
+
     </fragment>
 
     <dialog
         android:id="@+id/dialogAspects"
         android:name="com.example.androidsampleconfiguration.app.ui.master.AspectsDialog">
         <action
-            android:id="@+id/myaction"
+            android:id="@+id/dialogToMaster"
             app:destination="@+id/masterFragment" />
 
         <argument

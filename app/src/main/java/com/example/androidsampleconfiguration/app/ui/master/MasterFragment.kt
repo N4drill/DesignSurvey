@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.androidsampleconfiguration.R
+import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.app.ui.DaggerViewModelFactory
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
@@ -23,13 +24,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class MasterFragment : DaggerFragment() {
-
     private val compositeDisposable = CompositeDisposable()
-
     private val surveyAdapter: SurveyCardStackAdapter by lazy { SurveyCardStackAdapter() }
 
     @Inject
     lateinit var factory: DaggerViewModelFactory<MasterViewModel>
+
+    @Inject
+    lateinit var aspectObserver: AspectObserver
 
     lateinit var binding: FragmentMasterBinding
 
@@ -50,6 +52,7 @@ class MasterFragment : DaggerFragment() {
         initBinding()
         setupCardStack()
         observeListenerEvents()
+        observeAspects()
         Timber.d("Master Fragment created")
     }.root
 
@@ -62,6 +65,14 @@ class MasterFragment : DaggerFragment() {
             layoutManager = SurveyCardStackLayoutManager(context, surveyCardStackListener)
             adapter = surveyAdapter
         }
+    }
+
+    private fun observeAspects() {
+        aspectObserver.aspects.subscribe({
+            Timber.d("GOT NEW ASPECTS, DIALOG TRIGGERED!: $it")
+            onAspectsDialogCall(it)
+        }, { Timber.e(it, "Something went wrong watching ASPECTS") })
+            .addTo(compositeDisposable)
     }
 
     private fun observeListenerEvents() {
@@ -94,9 +105,13 @@ class MasterFragment : DaggerFragment() {
             .addTo(compositeDisposable)
     }
 
+    private fun onAspectsDialogCall(selectedAspects: List<String>) {
+        viewModel.sendAnswer(selectedAspects)
+    }
+
     private fun onQuestionSwiped(question: QuestionEntity) {
         if (question.aspects.isEmpty()) {
-//            viewModel.sendAnswer(aspectsSelected = emptyList())
+            viewModel.sendAnswer(aspectsSelected = emptyList())
         } else {
             val navController = findNavController()
             val action = MasterFragmentDirections.masterToDialog(question.aspects.map { it.title }.toTypedArray())
