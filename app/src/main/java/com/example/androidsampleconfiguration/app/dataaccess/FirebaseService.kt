@@ -72,6 +72,7 @@ class FirebaseService @Inject constructor(
             toInsert["firstdecision"] = firstDecision
             toInsert["finaldecision"] = finalDecision
             toInsert["user"] = requireNotNull(user)
+            toInsert["selectedAspects"] = selectedAspects
         }
 
         val answerRef = firestore.collection(ANSWER_COLLECTION)

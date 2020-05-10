@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class InsertAnswer @Inject constructor(
     private val answerRepository: AnswerRepository
-    ) {
+) {
 
     fun execute(answerData: AnswerData, userModel: UserModel): Single<DocumentReference> =
         answerRepository.insert(answerData.toAnswerModel(userModel))
@@ -23,7 +23,8 @@ class InsertAnswer @Inject constructor(
         swapDirectionChangesCount = swapDirectionChangesCount,
         firstDecision = firstDecision,
         finalDecision = finalDecision,
-        user = userModel
+        user = userModel,
+        selectedAspects = selectedAspects
     )
 }
 
@@ -35,5 +36,6 @@ data class AnswerModel(
     val swapDirectionChangesCount: Int,
     val firstDecision: Direction,
     val finalDecision: Direction,
-    val user: UserModel
+    val user: UserModel,
+    val selectedAspects: List<String>
 )

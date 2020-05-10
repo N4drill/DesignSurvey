@@ -154,7 +154,6 @@ class MasterViewModel @Inject constructor(
 
     private fun onSwiped(event: OnSwiped) {
         Timber.d("SURVEY: Question swiped: ${event.direction}")
-        currentQuestion = availableQuestions[nextReserved]
         actionSubject.onNext(QuestionSwiped(currentQuestion))
 //        sendAnswer()
     }
@@ -162,7 +161,6 @@ class MasterViewModel @Inject constructor(
     private fun onAppeared(event: OnAppeared) {
         Timber.d("SURVEY: New question appeared")
         nextReserved = event.position
-        startNewQuestion()
     }
 
     private fun onCanceled() {
@@ -188,7 +186,8 @@ class MasterViewModel @Inject constructor(
             dragFails = failedToSwap,
             firstDecision = requireNotNull(firstDirection),
             finalDecision = requireNotNull(currentSwapDirection),
-            swapDirectionChangesCount = swapDirectionChanged
+            swapDirectionChangesCount = swapDirectionChanged,
+            selectedAspects = aspectsSelected
         )
 
         getCurrentUser.execute()
@@ -201,6 +200,7 @@ class MasterViewModel @Inject constructor(
                 )
             }.subscribe({
                 currentQuestion = availableQuestions[nextReserved]
+                startNewQuestion()
             }, { Timber.e(it, "Something went wrong while inserting new answer") })
             .addTo(compositeDisposable)
     }
@@ -212,7 +212,8 @@ class MasterViewModel @Inject constructor(
         val dragFails: Int,
         val swapDirectionChangesCount: Int,
         val firstDecision: Direction,
-        val finalDecision: Direction
+        val finalDecision: Direction,
+        val selectedAspects: List<String>
     )
 
     //region Actions and Commands
