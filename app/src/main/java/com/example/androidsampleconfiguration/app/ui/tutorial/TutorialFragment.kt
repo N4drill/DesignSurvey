@@ -6,15 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.example.androidsampleconfiguration.R
+import com.example.androidsampleconfiguration.app.ui.tutorial.PageInstructionFragment.PageListener
 import com.example.androidsampleconfiguration.databinding.FragmentInstructionBinding
 import dagger.android.support.DaggerFragment
 
-class TutorialFragment : DaggerFragment() {
+class TutorialFragment : DaggerFragment(), PageListener {
+
 
     lateinit var binding: FragmentInstructionBinding
 
     private val adapter: TutorialPagerAdapter by lazy {
-        TutorialPagerAdapter(fragmentManager = childFragmentManager, steps = steps)
+        TutorialPagerAdapter(
+            fragmentManager = childFragmentManager,
+            steps = steps,
+            pageListener = this@TutorialFragment
+        )
     }
 
     private val viewPager: ViewPager by lazy {
@@ -27,12 +33,17 @@ class TutorialFragment : DaggerFragment() {
         }.root
 
     private fun FragmentInstructionBinding.setup() {
+        buttonVisible = false
         binding = this
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewPager.adapter = adapter
         binding.tlInstructions.setupWithViewPager(viewPager)
+    }
+
+    override fun showButton() {
+        binding.buttonVisible = true
     }
 }
 
