@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_default">
+
+        <ImageView
+            android:id="@+id/iv_step_image"
+            android:layout_width="@dimen/match_constraints"
+            android:layout_height="@dimen/match_constraints"
+            android:src="@drawable/ic_android_black_24dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_step_message"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="@id/left_guideline"
+            app:layout_constraintRight_toRightOf="@id/right_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15"
+            />
+
+        <TextView
+            android:id="@+id/tv_step_message"
+            android:layout_width="@dimen/match_constraints"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            android:paddingHorizontal="@dimen/padding_default"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/left_guideline"
+            app:layout_constraintRight_toRightOf="@id/right_guideline"
+            app:layout_constraintTop_toBottomOf="@id/iv_step_image"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin egestas vehicula orci, pretium placerat metus elementum sed. Cras non aliquam nunc. Ut tincidunt orci mauris, et bibendum nulla semper ut. Nullam et commodo ligula, ut finibus tortor. Vestibulum ante ipsum primis in faucibus  " />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
