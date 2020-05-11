@@ -26,6 +26,7 @@
     <string name="info_swipe_right">Swipe right if like</string>
     <string name="aspects_title">Why did you decided like that?</string>
     <string name="aspects_dialog_button">Accept</string>
+    <string name="instructions_title">Instructions</string>
     <!-- Arrays -->
 
     <string-array name="professions">

@@ -16,4 +16,5 @@ abstract class FragmentBuilder {
     @FragmentScope
     @ContributesAndroidInjector
     abstract fun bindAspectsDialog(): AspectsDialog
+
 }
