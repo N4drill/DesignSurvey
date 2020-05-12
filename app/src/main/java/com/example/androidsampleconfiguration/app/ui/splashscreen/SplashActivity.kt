@@ -7,7 +7,6 @@ import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.app.dataaccess.repository.UserRepository
 import com.example.androidsampleconfiguration.app.domain.SharedPreferenceManager
 import com.example.androidsampleconfiguration.app.ui.MainActivity
-import com.example.androidsampleconfiguration.app.ui.tutorial.TutorialActivity
 import com.example.androidsampleconfiguration.app.ui.userform.FormActivity
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.observeOnMain
@@ -33,9 +32,6 @@ class SplashActivity : DaggerAppCompatActivity() {
         DataBindingUtil.setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)
         Timber.plant(Timber.DebugTree())
         Timber.d("Application just started")
-
-        val tutorialIntent = Intent(this, TutorialActivity::class.java)
-        startActivity(tutorialIntent)
 
         isFirstEntrance()
             .observeOnMain()
