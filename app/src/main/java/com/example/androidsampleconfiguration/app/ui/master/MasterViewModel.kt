@@ -94,7 +94,6 @@ class MasterViewModel @Inject constructor(
                     currentQuestion = it[0]
                 }
 
-//                startNewQuestion()
             }, { Timber.e(it, "Something went wrong with QUESTIONS REPOSITORY") })
             .addTo(compositeDisposable)
 
@@ -102,11 +101,11 @@ class MasterViewModel @Inject constructor(
 
     private fun startNewQuestion() {
         Timber.d("SURVEY: Starting new question")
-        restartTimers()
+        restartMeasurements()
         runStartTimer()
     }
 
-    private fun restartTimers() {
+    private fun restartMeasurements() {
         startQuestionTime = currentTimeMillis()
         startDraggingTime = DEFAULT_DRAGGING_TIME
         swapDirectionChanged = DEFAULT_DIRECTION_CHANGE_COUNT
@@ -155,7 +154,6 @@ class MasterViewModel @Inject constructor(
     private fun onSwiped(event: OnSwiped) {
         Timber.d("SURVEY: Question swiped: ${event.direction}")
         actionSubject.onNext(QuestionSwiped(currentQuestion))
-//        sendAnswer()
     }
 
     private fun onAppeared(event: OnAppeared) {
@@ -190,7 +188,10 @@ class MasterViewModel @Inject constructor(
             selectedAspects = aspectsSelected
         )
 
+        startNewQuestion()
+
         getCurrentUser.execute()
+            .retry(5)
             .flatMap { user ->
                 insertAnswer.execute(model, user).map { user }
             }.flatMapCompletable { user ->
@@ -200,7 +201,6 @@ class MasterViewModel @Inject constructor(
                 )
             }.subscribe({
                 currentQuestion = availableQuestions[nextReserved]
-                startNewQuestion()
             }, { Timber.e(it, "Something went wrong while inserting new answer") })
             .addTo(compositeDisposable)
     }
