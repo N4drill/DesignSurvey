@@ -141,7 +141,10 @@ class MasterFragment : DaggerFragment() {
             viewModel.sendAnswer(aspectsSelected = emptyList())
         } else {
             val navController = findNavController()
-            val action = MasterFragmentDirections.masterToDialog(question.aspects.map { it.title }.toTypedArray())
+            val action = MasterFragmentDirections.masterToDialog(
+                aspects = question.aspects.map { it.title }.toTypedArray(),
+                imageUrl = question.url
+            )
             navController.navigate(action)
         }
     }

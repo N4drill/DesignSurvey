@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.Aspect
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.AspectListener
@@ -26,7 +27,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
     @Inject
     lateinit var aspectObserver: AspectObserver
 
-    val args: AspectsDialogArgs by navArgs()
+    private val args: AspectsDialogArgs by navArgs()
 
     override fun aspectClicked(aspect: Aspect) {
         Timber.d("Aspect ${aspect.title} clicked")
@@ -43,15 +44,17 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
         DialogAspectsBinding.inflate(inflater, container, false).apply {
             this@AspectsDialog.isCancelable = false
             setupRecycler(args.aspects.toList())
-            setupLayout()
+            setupLayout(args.imageUrl)
         }.root
 
-    private fun DialogAspectsBinding.setupLayout() {
+    private fun DialogAspectsBinding.setupLayout(imageUrl: String) {
         btnAspectsAccept.setOnClickListener {
             val result = aspectAdapter.items.filter { it.selected }.map { it.title }
             aspectObserver.aspectsSubject.onNext(result)
             findNavController().navigateUp()
         }
+
+        Glide.with(this@AspectsDialog).load(imageUrl).into(ivPreview)
     }
 
     private fun DialogAspectsBinding.setupRecycler(aspects: List<String>) {

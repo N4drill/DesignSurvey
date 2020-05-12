@@ -16,7 +16,7 @@
         android:layout_marginBottom="@dimen/margin_default"
         android:background="@{selected ? @drawable/item_aspect_background_selected : @drawable/item_aspect_background_not_selected}"
         android:fontFamily="sans-serif-condensed"
-        android:padding="@dimen/padding_default"
+        android:padding="@dimen/padding_small"
         android:textAlignment="center"
         android:textSize="@dimen/font_big"
         android:textColor="@{selected ? @android:color/white : @color/text_color}"
