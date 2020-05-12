@@ -31,6 +31,7 @@
             android:layout_height="match_parent"
             android:background="@color/blur"
             android:elevation="8dp"
+            tools:visibility="gone"
             android:visibility="@{contentHideVisible ? View.VISIBLE : View.GONE}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,8 +98,30 @@
                 android:textSize="@dimen/font_double"
                 app:layout_constraintBottom_toTopOf="@id/card_stack"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/iv_arrow"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="@dimen/match_constraints"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_message"
+                app:layout_constraintLeft_toRightOf="@id/tv_title_message"
+                app:layout_constraintRight_toLeftOf="@id/iv_pause"
+                app:layout_constraintTop_toTopOf="@id/tv_title_message" />
+
+            <ImageView
+                android:id="@+id/iv_pause"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="@dimen/match_constraints"
+                android:clickable="@{!contentHideVisible}"
+                android:src="@drawable/ic_pause"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_message"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_message" />
+
 
             <ProgressBar
                 android:layout_width="128dp"

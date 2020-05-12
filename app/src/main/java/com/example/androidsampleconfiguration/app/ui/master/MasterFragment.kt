@@ -60,6 +60,9 @@ class MasterFragment : DaggerFragment() {
 
     private fun FragmentMasterBinding.initBinding() {
         progressVisible = true
+        ivPause.setOnClickListener {
+            changeHideVisibility(true)
+        }
     }
 
     private fun FragmentMasterBinding.setupCardStack() {
@@ -73,7 +76,13 @@ class MasterFragment : DaggerFragment() {
         buttonHideClickable = false
         contentHideVisible = true
         btnHide.setOnClickListener {
-            contentHideVisible = false
+            changeHideVisibility(false)
+        }
+    }
+
+    private fun changeHideVisibility(visible: Boolean) {
+        binding.contentHideVisible = visible
+        if (!visible) {
             viewModel.startNewQuestion()
         }
     }
