@@ -26,7 +26,7 @@ class SurveyCardStackLayoutManager(context: Context, cardStackListener: CardStac
         setScaleInterval(0.75f)
         setMaxDegree(40.0f)
         setDirections(Direction.HORIZONTAL)
-        setSwipeThreshold(0.75f)
+        setSwipeThreshold(0.5f)
         setCanScrollHorizontal(true)
         setCanScrollVertical(true)
         setSwipeableMethod(SwipeableMethod.Manual)
