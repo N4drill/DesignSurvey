@@ -16,6 +16,8 @@
     <string name="form_accept">Start</string>
     <string name="profession_non_programmer">Non Programmer</string>
     <string name="exit_message">Press back again to exit</string>
+    <string name="survey_ready">Survey ready, we can start!</string>
+    <string name="hide_button_ready">Start</string>
 
 
     <string name="no_experience">No experience</string>
@@ -29,7 +31,9 @@
     <string name="aspects_dialog_button">Accept</string>
     <string name="instructions_title">Instructions</string>
     <string name="hide_message">We will start soon, be ready</string>
-    <string name="hide_button">Let\'s start</string>
+    <string name="hide_button">Wait ...</string>
+    <string name="instructions_label">Instructions</string>
+    <string name="pause_label">Pause</string>
     <!-- Arrays -->
 
     <string-array name="professions">

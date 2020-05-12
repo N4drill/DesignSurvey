@@ -88,30 +88,25 @@
             tools:context=".app.ui.master.MasterFragment">
 
 
-            <TextView
-                android:id="@+id/tv_title_message"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/match_constraints"
-                android:text="@string/welcome_back"
-                android:textAlignment="center"
-                android:layout_marginRight="@dimen/margin_default"
-                android:gravity="center"
-                android:textSize="@dimen/font_normal"
-                app:layout_constraintBottom_toBottomOf="@id/iv_pause"
-                app:layout_constraintRight_toLeftOf="@id/iv_arrow"
-                app:layout_constraintTop_toTopOf="@id/iv_pause" />
-
-
             <ImageView
-                android:id="@+id/iv_arrow"
-                android:layout_width="36dp"
-                android:layout_height="@dimen/match_constraints"
-                android:layout_marginRight="@dimen/margin_small"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintBottom_toBottomOf="@id/iv_pause"
-                app:layout_constraintRight_toLeftOf="@id/iv_pause"
+                android:id="@+id/iv_information"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:clickable="@{!contentHideVisible}"
+                android:src="@drawable/ic_info"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintTop_toTopOf="@id/iv_pause" />
+                app:layout_constraintLeft_toLeftOf="@id/tv_instruction_title"
+                app:layout_constraintRight_toRightOf="@id/tv_instruction_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_instruction_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_label"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_information" />
 
             <ImageView
                 android:id="@+id/iv_pause"
@@ -122,6 +117,16 @@
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_pause_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pause_label"
+                android:textSize="@dimen/font_small"
+                app:layout_constraintLeft_toLeftOf="@id/iv_pause"
+                app:layout_constraintRight_toRightOf="@id/iv_pause"
+                app:layout_constraintTop_toBottomOf="@id/iv_pause" />
 
 
             <ProgressBar
@@ -154,10 +159,11 @@
                 android:layout_width="@dimen/match_constraints"
                 android:layout_height="@dimen/match_constraints"
                 android:layout_marginBottom="@dimen/margin_big"
+                android:layout_marginTop="@dimen/margin_default"
                 app:layout_constraintBottom_toTopOf="@id/info_img_left"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_pause" />
+                app:layout_constraintTop_toBottomOf="@id/tv_instruction_title" />
 
             <ImageView
                 android:id="@+id/info_img_left"

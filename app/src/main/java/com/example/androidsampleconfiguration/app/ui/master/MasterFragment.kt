@@ -1,5 +1,6 @@
 package com.example.androidsampleconfiguration.app.ui.master
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Acti
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapter
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackLayoutManager
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener
+import com.example.androidsampleconfiguration.app.ui.tutorial.TutorialActivity
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.exhaustivePatternCheck
 import com.example.androidsampleconfiguration.databinding.FragmentMasterBinding
@@ -62,6 +64,10 @@ class MasterFragment : DaggerFragment() {
         progressVisible = true
         ivPause.setOnClickListener {
             changeHideVisibility(true)
+        }
+        ivInformation.setOnClickListener {
+            val tutorialIntent = Intent(activity, TutorialActivity::class.java)
+            startActivity(tutorialIntent)
         }
     }
 
@@ -147,6 +153,8 @@ class MasterFragment : DaggerFragment() {
 
     private fun onSurveyReady() {
         binding.buttonHideClickable = true
+        binding.tvHideMessage.setText(R.string.survey_ready)
+        binding.btnHide.setText(R.string.hide_button_ready)
     }
 
     private fun onItemsLoaded() {
