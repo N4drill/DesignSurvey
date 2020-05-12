@@ -30,6 +30,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="never"
             android:id="@+id/rv_aspects_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +42,7 @@
         <Button
             android:id="@+id/btn_aspects_accept"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="48dp"
             android:background="@drawable/button_background"
             android:text="@string/aspects_dialog_button"
             app:layout_constraintBottom_toBottomOf="parent"
