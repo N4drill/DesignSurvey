@@ -140,6 +140,11 @@ class MasterFragment : DaggerFragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        changeHideVisibility(true)
+    }
+
     private fun onSurveyReady() {
         binding.buttonHideClickable = true
     }
