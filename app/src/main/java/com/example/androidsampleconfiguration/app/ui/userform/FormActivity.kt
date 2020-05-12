@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.app.dataaccess.repository.UserRepository
 import com.example.androidsampleconfiguration.app.domain.SharedPreferenceManager
-import com.example.androidsampleconfiguration.app.ui.MainActivity
+import com.example.androidsampleconfiguration.app.ui.tutorial.TutorialActivity
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender.FEMALE
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender.MALE
@@ -82,8 +82,9 @@ class FormActivity : DaggerAppCompatActivity() {
                     userRepository.insert(currentUserModel)
                         .doAfterSuccess {
                             changeProgressVisibility(false)
-                            val masterIntent = Intent(this@FormActivity, MainActivity::class.java)
-                            startActivity(masterIntent)
+
+                            val tutorialIntent = Intent(this@FormActivity, TutorialActivity::class.java)
+                            startActivity(tutorialIntent)
                         }
                         .subscribe({
                             Timber.d("New user inserted, fetched id: ${it.id}")

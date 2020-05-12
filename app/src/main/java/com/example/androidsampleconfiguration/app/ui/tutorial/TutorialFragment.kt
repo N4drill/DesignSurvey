@@ -1,17 +1,22 @@
 package com.example.androidsampleconfiguration.app.ui.tutorial
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.example.androidsampleconfiguration.R
+import com.example.androidsampleconfiguration.app.ui.MainActivity
 import com.example.androidsampleconfiguration.app.ui.tutorial.PageInstructionFragment.PageListener
 import com.example.androidsampleconfiguration.databinding.FragmentInstructionBinding
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class TutorialFragment : DaggerFragment(), PageListener {
 
+    @Inject
+    lateinit var tutorialActivity: TutorialActivity
 
     lateinit var binding: FragmentInstructionBinding
 
@@ -35,6 +40,15 @@ class TutorialFragment : DaggerFragment(), PageListener {
     private fun FragmentInstructionBinding.setup() {
         buttonVisible = false
         binding = this
+
+        btnStart.setOnClickListener {
+            runApplication()
+        }
+    }
+
+    private fun runApplication() {
+        val masterIntent = Intent(tutorialActivity, MainActivity::class.java)
+        startActivity(masterIntent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

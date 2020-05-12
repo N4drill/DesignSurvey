@@ -6,7 +6,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.androidsampleconfiguration.app.ui.tutorial.PageInstructionFragment.PageListener
 
-class TutorialPagerAdapter(fragmentManager: FragmentManager, private val steps: List<Step>, private val pageListener: PageListener) :
+class TutorialPagerAdapter(
+    fragmentManager: FragmentManager,
+    private val steps: List<Step>,
+    private val pageListener: PageListener
+) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment = PageInstructionFragment(listener = pageListener).apply {
