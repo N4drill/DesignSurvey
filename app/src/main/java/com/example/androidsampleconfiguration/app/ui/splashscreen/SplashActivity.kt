@@ -39,7 +39,9 @@ class SplashActivity : DaggerAppCompatActivity() {
                 when (isFirst) {
                     true -> {
                         Timber.d("First entrance in application, intent to form")
-                        val formIntent = Intent(this, FormActivity::class.java)
+                        val formIntent = Intent(this, FormActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        }
                         startActivity(formIntent)
                     }
                     false -> {

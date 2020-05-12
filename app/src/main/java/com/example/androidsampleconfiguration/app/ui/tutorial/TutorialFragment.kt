@@ -47,7 +47,9 @@ class TutorialFragment : DaggerFragment(){
     }
 
     private fun runApplication() {
-        val masterIntent = Intent(tutorialActivity, MainActivity::class.java)
+        val masterIntent = Intent(tutorialActivity, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
         startActivity(masterIntent)
     }
 

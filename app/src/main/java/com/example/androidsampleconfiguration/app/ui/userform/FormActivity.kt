@@ -16,6 +16,7 @@ import com.example.androidsampleconfiguration.app.ui.tutorial.TutorialActivity
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender.FEMALE
 import com.example.androidsampleconfiguration.app.ui.userform.UserModel.Gender.MALE
+import com.example.androidsampleconfiguration.commons.CloseAppManager
 import com.example.androidsampleconfiguration.commons.SeekBarChangeListener
 import com.example.androidsampleconfiguration.databinding.ActivityFormBinding
 import dagger.android.support.DaggerAppCompatActivity
@@ -27,6 +28,7 @@ import kotlin.properties.Delegates
 class FormActivity : DaggerAppCompatActivity() {
 
     private lateinit var binding: ActivityFormBinding
+    private val closeAppManager = CloseAppManager(this)
 
     @Inject
     lateinit var userRepository: UserRepository
@@ -83,7 +85,9 @@ class FormActivity : DaggerAppCompatActivity() {
                         .doAfterSuccess {
                             changeProgressVisibility(false)
 
-                            val tutorialIntent = Intent(this@FormActivity, TutorialActivity::class.java)
+                            val tutorialIntent = Intent(this@FormActivity, TutorialActivity::class.java).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            }
                             startActivity(tutorialIntent)
                         }
                         .subscribe({
@@ -210,6 +214,10 @@ class FormActivity : DaggerAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         onDestroyDisposable.clear()
+    }
+
+    override fun onBackPressed() {
+        closeAppManager.closeAppAfterSecondTap()
     }
 
     companion object {
