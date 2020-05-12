@@ -7,4 +7,8 @@
     <color name="colorAccentDark">#c73e45</color>
     <color name="colorAccentLight">#ffa29e</color>
     <color name="text_color">#4E4E4E</color>
+
+    <color name="color_disable_start">#6B6B6B</color>
+    <color name="color_disable_end">#505050</color>
+    <color name="blur">#C6808080</color>
 </resources>

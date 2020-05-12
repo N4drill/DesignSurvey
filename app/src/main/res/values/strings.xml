@@ -27,6 +27,8 @@
     <string name="aspects_title">Why did you decided like that?</string>
     <string name="aspects_dialog_button">Accept</string>
     <string name="instructions_title">Instructions</string>
+    <string name="hide_message">We will start soon, be ready</string>
+    <string name="hide_button">Let\'s start</string>
     <!-- Arrays -->
 
     <string-array name="professions">

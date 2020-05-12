@@ -12,6 +12,7 @@ import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.presentation.toQuestions
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.QuestionSwiped
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SurveyReady
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent.OnAppeared
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener.CardListenerEvent.OnCanceled
@@ -67,6 +68,7 @@ class MasterViewModel @Inject constructor(
     private var failedToSwap = DEFAULT_FAILED_TO_SWAP
     private var firstDirection: Direction? = null
     private var currentSwapDirection: Direction? = null
+    private var endQuestionTime = currentTimeMillis()
 
     private var nextReserved: Int = 0
 
@@ -94,12 +96,14 @@ class MasterViewModel @Inject constructor(
                     currentQuestion = it[0]
                 }
 
+                actionSubject.onNext(SurveyReady)
+
             }, { Timber.e(it, "Something went wrong with QUESTIONS REPOSITORY") })
             .addTo(compositeDisposable)
 
     }
 
-    private fun startNewQuestion() {
+    fun startNewQuestion() {
         Timber.d("SURVEY: Starting new question")
         restartMeasurements()
         runStartTimer()
@@ -107,6 +111,7 @@ class MasterViewModel @Inject constructor(
 
     private fun restartMeasurements() {
         startQuestionTime = currentTimeMillis()
+        endQuestionTime = currentTimeMillis()
         startDraggingTime = DEFAULT_DRAGGING_TIME
         swapDirectionChanged = DEFAULT_DIRECTION_CHANGE_COUNT
         failedToSwap = DEFAULT_FAILED_TO_SWAP
@@ -153,6 +158,7 @@ class MasterViewModel @Inject constructor(
 
     private fun onSwiped(event: OnSwiped) {
         Timber.d("SURVEY: Question swiped: ${event.direction}")
+        endQuestionTime = currentTimeMillis()
         actionSubject.onNext(QuestionSwiped(currentQuestion))
     }
 
@@ -174,7 +180,7 @@ class MasterViewModel @Inject constructor(
     fun sendAnswer(aspectsSelected: List<String>) {
         Timber.d("Send answer get: $aspectsSelected")
         val currentTime = currentTimeMillis()
-        val answerTime = currentTime - startQuestionTime
+        val answerTime = endQuestionTime - startQuestionTime
         val lastDraggingTime = currentTime - startDraggingTime
 
         val model = AnswerData(
@@ -221,6 +227,7 @@ class MasterViewModel @Inject constructor(
 
         object ItemsLoaded : Action()
         data class QuestionSwiped(val question: QuestionEntity) : Action()
+        object SurveyReady : Action()
     }
 
     sealed class Command

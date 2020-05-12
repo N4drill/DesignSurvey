@@ -9,110 +9,180 @@
             name="progressVisible"
             type="Boolean" />
 
+        <variable
+            name="contentHideVisible"
+            type="boolean" />
+
+        <variable
+            name="buttonHideClickable"
+            type="boolean" />
+
         <import type="android.view.View" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/master_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_default"
-        tools:context=".app.ui.master.MasterFragment">
+        android:background="@android:color/transparent">
 
-        <TextView
-            android:id="@+id/tv_title_message"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_default"
-            android:text="@string/welcome_back"
-            android:textAlignment="center"
-            android:textSize="@dimen/font_double"
-            app:layout_constraintBottom_toTopOf="@id/card_stack"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ProgressBar
-            android:layout_width="128dp"
-            android:layout_height="@dimen/match_constraints"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blur"
             android:elevation="8dp"
-            android:visibility="@{progressVisible ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/card_stack"
+            android:visibility="@{contentHideVisible ? View.VISIBLE : View.GONE}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_hide"
+            android:layout_width="300dp"
+            android:layout_height="@dimen/match_constraints"
+            android:background="@drawable/hide_background"
+            android:elevation="12dp"
+            android:padding="@dimen/padding_big"
+            android:visibility="@{contentHideVisible ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintLeft_toLeftOf="@id/card_stack"
-            app:layout_constraintRight_toRightOf="@id/card_stack"
-            app:layout_constraintTop_toTopOf="@id/card_stack" />
-
-        <TextView
-            android:id="@+id/tv_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/margin_super_big"
-            android:text="@string/placeholder"
-            android:textAlignment="center"
-            android:textSize="@dimen/font_double"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.yuyakaido.android.cardstackview.CardStackView
-            android:id="@+id/card_stack"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="@dimen/match_constraints"
-            android:layout_marginBottom="@dimen/margin_big"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/info_img_left"
-            app:layout_constraintTop_toBottomOf="@id/tv_title_message" />
-
-        <ImageView
-            android:id="@+id/info_img_left"
-            android:layout_width="@dimen/info_image_size"
-            android:layout_height="@dimen/info_image_size"
-            android:layout_marginLeft="@dimen/margin_default"
-            android:src="@drawable/ic_dislike_hand"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@id/card_stack"
-            app:layout_constraintTop_toBottomOf="@id/card_stack" />
-
-        <ImageView
-            android:id="@+id/info_left"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="@dimen/match_constraints"
-            android:src="@drawable/ic_swipe_left"
-            app:layout_constraintBottom_toBottomOf="@id/info_img_left"
-            app:layout_constraintLeft_toRightOf="@id/info_img_left"
-            app:layout_constraintRight_toRightOf="@id/guideline"
-            app:layout_constraintTop_toTopOf="@id/info_img_left" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <ImageView
-            android:id="@+id/info_img_right"
-            android:layout_width="@dimen/info_image_size"
-            android:layout_height="@dimen/info_image_size"
-            android:layout_marginRight="@dimen/margin_default"
-            android:src="@drawable/ic_like_hand"
-            app:layout_constraintBottom_toBottomOf="@id/info_img_left"
-            app:layout_constraintRight_toRightOf="@id/card_stack" />
-
-        <ImageView
-            android:id="@+id/info_right"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="@dimen/match_constraints"
-            android:src="@drawable/ic_swipe_right"
-            app:layout_constraintBottom_toBottomOf="@id/info_img_right"
-            app:layout_constraintLeft_toRightOf="@id/guideline"
-            app:layout_constraintRight_toLeftOf="@id/info_img_right"
-            app:layout_constraintTop_toTopOf="@id/info_img_right" />
+            app:layout_constraintTop_toTopOf="parent">
 
 
+            <TextView
+                android:id="@+id/tv_hide_message"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:text="@string/hide_message"
+                android:textAlignment="center"
+                android:textSize="@dimen/font_big"
+                app:layout_constraintBottom_toTopOf="@id/btn_hide"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <Button
+                android:id="@+id/btn_hide"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_default"
+                android:layout_marginTop="@dimen/margin_super_big"
+                android:background="@{buttonHideClickable ? @drawable/button_background_asspect : @drawable/button_background_disable}"
+                android:clickable="@{buttonHideClickable}"
+                android:text="@string/hide_button"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_hide_message" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/master_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_default"
+            tools:context=".app.ui.master.MasterFragment">
+
+
+            <TextView
+                android:id="@+id/tv_title_message"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_default"
+                android:text="@string/welcome_back"
+                android:textAlignment="center"
+                android:textSize="@dimen/font_double"
+                app:layout_constraintBottom_toTopOf="@id/card_stack"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:layout_width="128dp"
+                android:layout_height="@dimen/match_constraints"
+                android:elevation="4dp"
+                android:visibility="@{progressVisible ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@id/card_stack"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="@id/card_stack"
+                app:layout_constraintRight_toRightOf="@id/card_stack"
+                app:layout_constraintTop_toTopOf="@id/card_stack" />
+
+            <TextView
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/margin_super_big"
+                android:text="@string/placeholder"
+                android:textAlignment="center"
+                android:textSize="@dimen/font_double"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.yuyakaido.android.cardstackview.CardStackView
+                android:id="@+id/card_stack"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="@dimen/match_constraints"
+                android:layout_marginBottom="@dimen/margin_big"
+                app:layout_constraintBottom_toTopOf="@id/info_img_left"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_message" />
+
+            <ImageView
+                android:id="@+id/info_img_left"
+                android:layout_width="@dimen/info_image_size"
+                android:layout_height="@dimen/info_image_size"
+                android:layout_marginLeft="@dimen/margin_default"
+                android:src="@drawable/ic_dislike_hand"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/card_stack"
+                app:layout_constraintTop_toBottomOf="@id/card_stack" />
+
+            <ImageView
+                android:id="@+id/info_left"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="@dimen/match_constraints"
+                android:src="@drawable/ic_swipe_left"
+                app:layout_constraintBottom_toBottomOf="@id/info_img_left"
+                app:layout_constraintLeft_toRightOf="@id/info_img_left"
+                app:layout_constraintRight_toRightOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/info_img_left" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <ImageView
+                android:id="@+id/info_img_right"
+                android:layout_width="@dimen/info_image_size"
+                android:layout_height="@dimen/info_image_size"
+                android:layout_marginRight="@dimen/margin_default"
+                android:src="@drawable/ic_like_hand"
+                app:layout_constraintBottom_toBottomOf="@id/info_img_left"
+                app:layout_constraintRight_toRightOf="@id/card_stack" />
+
+            <ImageView
+                android:id="@+id/info_right"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="@dimen/match_constraints"
+                android:src="@drawable/ic_swipe_right"
+                app:layout_constraintBottom_toBottomOf="@id/info_img_right"
+                app:layout_constraintLeft_toRightOf="@id/guideline"
+                app:layout_constraintRight_toLeftOf="@id/info_img_right"
+                app:layout_constraintTop_toTopOf="@id/info_img_right" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

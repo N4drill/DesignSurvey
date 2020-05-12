@@ -12,6 +12,7 @@ import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.app.ui.DaggerViewModelFactory
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.QuestionSwiped
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SurveyReady
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapter
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackLayoutManager
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackListener
@@ -51,6 +52,7 @@ class MasterFragment : DaggerFragment() {
         viewModel.observeViewModel()
         initBinding()
         setupCardStack()
+        setupHideLayout()
         observeListenerEvents()
         observeAspects()
         Timber.d("Master Fragment created")
@@ -64,6 +66,15 @@ class MasterFragment : DaggerFragment() {
         cardStack.apply {
             layoutManager = SurveyCardStackLayoutManager(context, surveyCardStackListener)
             adapter = surveyAdapter
+        }
+    }
+
+    private fun FragmentMasterBinding.setupHideLayout() {
+        buttonHideClickable = false
+        contentHideVisible = true
+        btnHide.setOnClickListener {
+            contentHideVisible = false
+            viewModel.startNewQuestion()
         }
     }
 
@@ -95,6 +106,7 @@ class MasterFragment : DaggerFragment() {
                 when (it) {
                     ItemsLoaded -> onItemsLoaded()
                     is QuestionSwiped -> onQuestionSwiped(question = it.question)
+                    SurveyReady -> onSurveyReady()
                 }.exhaustivePatternCheck()
             }, { Timber.d(it, "Something went wrong observing ACTION") })
             .addTo(compositeDisposable)
@@ -117,6 +129,10 @@ class MasterFragment : DaggerFragment() {
             val action = MasterFragmentDirections.masterToDialog(question.aspects.map { it.title }.toTypedArray())
             navController.navigate(action)
         }
+    }
+
+    private fun onSurveyReady() {
+        binding.buttonHideClickable = true
     }
 
     private fun onItemsLoaded() {
