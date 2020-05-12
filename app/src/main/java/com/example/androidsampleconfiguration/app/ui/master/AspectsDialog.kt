@@ -41,6 +41,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         DialogAspectsBinding.inflate(inflater, container, false).apply {
+            this@AspectsDialog.isCancelable = false
             setupRecycler(args.aspects.toList())
             setupLayout()
         }.root
