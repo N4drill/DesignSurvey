@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.app.ui.MainActivity
-import com.example.androidsampleconfiguration.app.ui.tutorial.PageInstructionFragment.PageListener
+import com.example.androidsampleconfiguration.commons.OnTabSelectListener
 import com.example.androidsampleconfiguration.databinding.FragmentInstructionBinding
+import com.google.android.material.tabs.TabLayout.Tab
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class TutorialFragment : DaggerFragment(), PageListener {
+class TutorialFragment : DaggerFragment(){
 
     @Inject
     lateinit var tutorialActivity: TutorialActivity
@@ -23,8 +24,7 @@ class TutorialFragment : DaggerFragment(), PageListener {
     private val adapter: TutorialPagerAdapter by lazy {
         TutorialPagerAdapter(
             fragmentManager = childFragmentManager,
-            steps = steps,
-            pageListener = this@TutorialFragment
+            steps = steps
         )
     }
 
@@ -54,10 +54,13 @@ class TutorialFragment : DaggerFragment(), PageListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewPager.adapter = adapter
         binding.tlInstructions.setupWithViewPager(viewPager)
-    }
-
-    override fun showButton() {
-        binding.buttonVisible = true
+        binding.tlInstructions.addOnTabSelectedListener(object : OnTabSelectListener() {
+            override fun onTabSelected(tab: Tab) {
+                if (tab.position == steps.size - 1) {
+                    binding.buttonVisible = true
+                }
+            }
+        })
     }
 }
 

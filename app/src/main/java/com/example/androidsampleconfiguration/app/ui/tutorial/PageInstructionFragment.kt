@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.databinding.PageInstructionBinding
 
-class PageInstructionFragment(private val listener: PageListener) : Fragment() {
+class PageInstructionFragment : Fragment() {
 
     lateinit var binding: PageInstructionBinding
 
@@ -23,19 +23,10 @@ class PageInstructionFragment(private val listener: PageListener) : Fragment() {
             message = arguments?.getString(TutorialPagerAdapter.MESSAGE_BUNDLE_KEY) ?: ""
         )
         updateLayout(step)
-
-        val shouldShowButton = arguments?.getBoolean(TutorialPagerAdapter.FINISH_BUNDLE_KEY) ?: false
-        if (shouldShowButton) {
-            listener.showButton()
-        }
     }
 
     private fun updateLayout(step: Step) {
         binding.ivStepImage.setImageResource(step.drawableRes)
         binding.tvStepMessage.text = step.message
-    }
-
-    interface PageListener {
-        fun showButton()
     }
 }
