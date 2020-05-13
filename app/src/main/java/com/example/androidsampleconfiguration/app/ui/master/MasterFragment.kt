@@ -11,6 +11,7 @@ import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.app.ui.DaggerViewModelFactory
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.AllQuestionSolved
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.QuestionSwiped
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SurveyReady
@@ -122,6 +123,7 @@ class MasterFragment : DaggerFragment() {
                     ItemsLoaded -> onItemsLoaded()
                     is QuestionSwiped -> onQuestionSwiped(question = it.question)
                     SurveyReady -> onSurveyReady()
+                    AllQuestionSolved -> onAllQuestionSolved()
                 }.exhaustivePatternCheck()
             }, { Timber.d(it, "Something went wrong observing ACTION") })
             .addTo(compositeDisposable)
@@ -134,6 +136,20 @@ class MasterFragment : DaggerFragment() {
 
     private fun onAspectsDialogCall(selectedAspects: List<String>) {
         viewModel.sendAnswer(selectedAspects)
+    }
+
+    private fun onAllQuestionSolved() {
+        changeHideVisibility(false)
+        with(binding) {
+            ivInformation.visibility = View.INVISIBLE
+            ivPause.visibility = View.INVISIBLE
+            infoImgLeft.visibility = View.INVISIBLE
+            infoLeft.visibility = View.INVISIBLE
+            infoRight.visibility = View.INVISIBLE
+            infoImgRight.visibility = View.INVISIBLE
+            tvInstructionTitle.visibility = View.INVISIBLE
+            tvPauseTitle.visibility = View.INVISIBLE
+        }
     }
 
     private fun onQuestionSwiped(question: QuestionEntity) {
@@ -155,15 +171,19 @@ class MasterFragment : DaggerFragment() {
     }
 
     private fun onSurveyReady() {
-        binding.buttonHideClickable = true
-        binding.tvHideMessage.setText(R.string.survey_ready)
-        binding.btnHide.setText(R.string.hide_button_ready)
+        with(binding) {
+            buttonHideClickable = true
+            tvHideMessage.setText(R.string.survey_ready)
+            btnHide.setText(R.string.hide_button_ready)
+        }
     }
 
     private fun onItemsLoaded() {
-        binding.progressVisible = false
-        binding.tvMessage.text = getString(R.string.thanks_message)
-        binding.tvMessage.visibility = View.VISIBLE
+        with(binding) {
+            progressVisible = false
+            tvMessage.text = getString(R.string.thanks_message)
+            tvMessage.visibility = View.VISIBLE
+        }
     }
 
     override fun onDestroy() {

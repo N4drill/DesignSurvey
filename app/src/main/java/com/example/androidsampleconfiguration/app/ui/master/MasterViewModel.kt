@@ -10,6 +10,7 @@ import com.example.androidsampleconfiguration.app.domain.SharedPreferenceManager
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.presentation.toQuestions
+import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.AllQuestionSolved
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.QuestionSwiped
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.SurveyReady
@@ -94,9 +95,10 @@ class MasterViewModel @Inject constructor(
 
                 if (it.isNotEmpty()) {
                     currentQuestion = it[0]
+                    actionSubject.onNext(SurveyReady)
+                } else {
+                    actionSubject.onNext(AllQuestionSolved)
                 }
-
-                actionSubject.onNext(SurveyReady)
 
             }, { Timber.e(it, "Something went wrong with QUESTIONS REPOSITORY") })
             .addTo(compositeDisposable)
@@ -228,6 +230,7 @@ class MasterViewModel @Inject constructor(
         object ItemsLoaded : Action()
         data class QuestionSwiped(val question: QuestionEntity) : Action()
         object SurveyReady : Action()
+        object AllQuestionSolved : Action()
     }
 
     sealed class Command
