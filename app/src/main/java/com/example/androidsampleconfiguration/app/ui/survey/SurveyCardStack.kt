@@ -3,6 +3,7 @@ package com.example.androidsampleconfiguration.app.ui.survey
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.ui.survey.SurveyCardStackAdapter.QuestionViewHolder
@@ -25,6 +26,7 @@ class SurveyCardStackLayoutManager(context: Context, cardStackListener: CardStac
         setTranslationInterval(12.0f)
         setScaleInterval(0.75f)
         setMaxDegree(40.0f)
+        setOverlayInterpolator(FastOutLinearInInterpolator())
         setDirections(Direction.HORIZONTAL)
         setSwipeThreshold(0.5f)
         setCanScrollHorizontal(true)

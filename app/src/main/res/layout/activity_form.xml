@@ -160,7 +160,6 @@
             android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="sans-serif-condensed"
             android:gravity="bottom"
-
             android:text="@string/form_design_experience"
             android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toTopOf="@id/seek_exp"
@@ -171,12 +170,12 @@
             android:id="@+id/tv_current_exp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_default"
+            android:layout_marginLeft="@dimen/margin_tiny"
             android:fontFamily="sans-serif-condensed"
             android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toBottomOf="@id/design_exp_label"
             app:layout_constraintLeft_toRightOf="@id/design_exp_label"
-            tools:text="4" />
+            tools:text="Mniej niz 3 lata" />
 
         <SeekBar
             android:id="@+id/seek_exp"
@@ -198,7 +197,7 @@
             android:shadowColor="@android:color/transparent"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/font_double"
+            android:textSize="@dimen/font_normal_plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -1,5 +1,7 @@
 package com.example.androidsampleconfiguration.app.ui.master
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +46,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         DialogAspectsBinding.inflate(inflater, container, false).apply {
             this@AspectsDialog.isCancelable = false
+            this@AspectsDialog.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             setupRecycler(args.aspects.toList())
             setupLayout(args.imageUrl)
         }.root

@@ -6,16 +6,15 @@
 
     </data>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/aspectsContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_default"
             android:background="@drawable/aspects_background"
             android:padding="@dimen/padding_default">
 
@@ -63,12 +62,19 @@
                 android:layout_marginTop="@dimen/margin_tiny"
                 android:background="@drawable/button_background"
                 android:padding="@dimen/padding_small"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
                 android:text="@string/aspects_dialog_button"
+                android:textSize="@dimen/font_normal_plus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_aspects_recycler" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+
+    </FrameLayout>
+
+
 </layout>

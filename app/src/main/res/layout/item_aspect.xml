@@ -18,7 +18,7 @@
         android:fontFamily="sans-serif-condensed"
         android:padding="@dimen/padding_small"
         android:textAlignment="center"
-        android:textSize="@dimen/font_normal_plus"
+        android:textSize="@dimen/font_normal_plus2"
         android:textColor="@{selected ? @android:color/white : @color/text_color}"
         tools:text="ASPECT_PLACEHOLDER">
 

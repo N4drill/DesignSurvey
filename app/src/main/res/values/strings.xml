@@ -13,34 +13,36 @@
     <string name="form_profession">Zawód</string>
     <string name="form_design_experience">Doświadczenie grafika:</string>
     <string name="form_accept">To ja, idźmy dalej</string>
-    <string name="profession_non_programmer">Non Programmer</string>
+    <string name="profession_non_programmer">Brak</string>
     <string name="exit_message">Cofnij jeszcze raz aby wyjść</string>
     <string name="survey_ready">Ankieta gotowa, zaczynamy!</string>
     <string name="hide_button_ready">Rozpocznij!</string>
 
 
-    <string name="no_experience">Brak doświadczenia</string>
+    <string name="no_experience">Brak</string>
     <string name="less_than_year">Mniej niż rok</string>
     <string name="one_two_years">1 – 2 lata</string>
     <string name="two_tree_years">2 – 3 lata</string>
-    <string name="more_than_three">Więcej niż trzy lata</string>
+    <string name="more_than_three">Więcej niż 3 lata</string>
     <string name="aspects_title">Które aspekty wpłynęły na Twoją decyzję?</string>
     <string name="aspects_dialog_button">Zaakceptuj wybrane</string>
     <string name="instructions_title">Instrukcje</string>
     <string name="hide_message">Zaraz zaczynamy, bądź gotów</string>
-    <string name="hide_button">Chwilka ...</string>
+    <string name="hide_button">Chwilka …</string>
     <string name="instructions_label">Instrukcje</string>
     <string name="pause_label">Przerwa</string>
+    <string name="instruction_start_button">Rozumiem, zaczynamy!</string>
     <!-- Arrays -->
 
     <string-array name="professions">
         <item>@string/profession_non_programmer</item>
-        <item>Backend Developer</item>
+        <item>Programista frontendowy</item>
+        <item>Programista mobilny</item>
+        <item>Programista back-endowy</item>
         <item>Designer</item>
-        <item>Frontend developer</item>
-        <item>Mobile Developer</item>
-        <item>Analyst</item>
-        <item>Working with people</item>
+        <item>Analityk</item>
+        <item>Projektant</item>
+        <item>Inny</item>
 
 
     </string-array>

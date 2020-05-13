@@ -230,7 +230,7 @@ class FormActivity : DaggerAppCompatActivity() {
         //DEFAULTS
         private val DEFAULT_GENDER = MALE
         private const val DEFAULT_AGE = 20
-        private const val DEFAULT_PROFESSION = "Non Programmer" // TODO: Update to get this from resources
+        private const val DEFAULT_PROFESSION = "Brak"
         private const val DEFAULT_EXP = 0
         private val DEFAULT_ANSWERED_QUESTIONS = listOf<String>()
 

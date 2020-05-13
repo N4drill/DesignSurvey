@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/question_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_card"
-        android:padding="@dimen/padding_default">
+        android:background="@drawable/background_card">
 
 
         <ImageView
@@ -18,8 +18,48 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/margin_default"
             android:contentDescription="@string/placeholder_image" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/left_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_overlay_dislike_background"
+            android:padding="@dimen/padding_super_big"
+            tools:visibility="invisible">
+
+            <ImageView
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="@dimen/match_constraints"
+                android:src="@drawable/ic_dislike_hand"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/right_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_overlay_like_background"
+            android:padding="@dimen/padding_super_big"
+            tools:visibility="invisible">
+
+            <ImageView
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="@dimen/match_constraints"
+                android:src="@drawable/ic_like_hand"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
