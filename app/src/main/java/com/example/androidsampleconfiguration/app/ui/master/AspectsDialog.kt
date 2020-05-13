@@ -13,6 +13,7 @@ import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.Aspect
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.AspectListener
 import com.example.androidsampleconfiguration.commons.extensions.autoNotify
+import com.example.androidsampleconfiguration.commons.extensions.translate
 import com.example.androidsampleconfiguration.databinding.DialogAspectsBinding
 import com.example.androidsampleconfiguration.databinding.ItemAspectBinding
 import dagger.android.support.DaggerDialogFragment
@@ -50,7 +51,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
     private fun DialogAspectsBinding.setupLayout(imageUrl: String) {
         btnAspectsAccept.setOnClickListener {
             val result = aspectAdapter.items.filter { it.selected }.map { it.title }
-            aspectObserver.aspectsSubject.onNext(result)
+            aspectObserver.aspectsSubject.onNext(result.translate(toEnglish = true))
             findNavController().navigateUp()
         }
 
@@ -62,9 +63,8 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
             layoutManager = LinearLayoutManager(context)
             adapter = AspectAdapter(aspectListener = this@AspectsDialog).also { aspectAdapter = it }
         }
-        aspectAdapter.items = aspects.toAspects()
+        aspectAdapter.items = aspects.translate(toEnglish = false).toAspects()
     }
-
 }
 
 fun List<String>.toAspects(): List<Aspect> = map { Aspect(title = it.capitalize(), selected = false) }

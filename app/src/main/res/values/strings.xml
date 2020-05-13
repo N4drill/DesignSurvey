@@ -1,39 +1,36 @@
 <resources>
     <string name="app_name">DesignSurvey</string>
-    <string name="welcome_back">Click here to pause</string>
     <string name="placeholder_image">placeholder_image</string>
-    <string name="thanks_message">Yay! You have finished all questions.\n Thanks!</string>
+    <string name="thanks_message">Skończyłeś już wszystko co dla Ciebie miałem. Dzięki!</string>
     <string name="placeholder">Placeholder</string>
-    <string name="application_loading">Application is loading, please wait...</string>
+    <string name="application_loading">Aplikacja się ładuje, proszę czekać…</string>
     <string name="app_title">DesignSurvey</string>
-    <string name="form_title">Tell me something about you</string>
-    <string name="label_sex">Gender</string>
-    <string name="switch_male">Male</string>
-    <string name="switch_female">Female</string>
-    <string name="form_age">Age:</string>
-    <string name="form_profession">Profession</string>
-    <string name="form_design_experience">Design Experience:</string>
-    <string name="form_accept">Start</string>
+    <string name="form_title">Powiedz coś o sobie</string>
+    <string name="label_sex">Płeć</string>
+    <string name="switch_male">Mężczyzna</string>
+    <string name="switch_female">Kobieta</string>
+    <string name="form_age">Wiek:</string>
+    <string name="form_profession">Zawód</string>
+    <string name="form_design_experience">Doświadczenie grafika:</string>
+    <string name="form_accept">To ja, idźmy dalej</string>
     <string name="profession_non_programmer">Non Programmer</string>
-    <string name="exit_message">Press back again to exit</string>
-    <string name="survey_ready">Survey ready, we can start!</string>
-    <string name="hide_button_ready">Start</string>
+    <string name="exit_message">Cofnij jeszcze raz aby wyjść</string>
+    <string name="survey_ready">Ankieta gotowa, zaczynamy!</string>
+    <string name="hide_button_ready">Rozpocznij!</string>
 
 
-    <string name="no_experience">No experience</string>
-    <string name="less_than_year">Less than year</string>
-    <string name="one_two_years">1 – 2 years</string>
-    <string name="two_tree_years">2 – 3 years</string>
-    <string name="more_than_three">More than 3 years</string>
-    <string name="info_swipe_left">Swipe left if dislake</string>
-    <string name="info_swipe_right">Swipe right if like</string>
-    <string name="aspects_title">Why did you decided like that?</string>
-    <string name="aspects_dialog_button">Accept</string>
-    <string name="instructions_title">Instructions</string>
-    <string name="hide_message">We will start soon, be ready</string>
-    <string name="hide_button">Wait ...</string>
-    <string name="instructions_label">Instructions</string>
-    <string name="pause_label">Pause</string>
+    <string name="no_experience">Brak doświadczenia</string>
+    <string name="less_than_year">Mniej niż rok</string>
+    <string name="one_two_years">1 – 2 lata</string>
+    <string name="two_tree_years">2 – 3 lata</string>
+    <string name="more_than_three">Więcej niż trzy lata</string>
+    <string name="aspects_title">Które aspekty wpłynęły na Twoją decyzję?</string>
+    <string name="aspects_dialog_button">Zaakceptuj wybrane</string>
+    <string name="instructions_title">Instrukcje</string>
+    <string name="hide_message">Zaraz zaczynamy, bądź gotów</string>
+    <string name="hide_button">Chwilka ...</string>
+    <string name="instructions_label">Instrukcje</string>
+    <string name="pause_label">Przerwa</string>
     <!-- Arrays -->
 
     <string-array name="professions">

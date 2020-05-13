@@ -13,12 +13,12 @@
         android:id="@+id/tv_aspect_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/margin_tiny"
         android:background="@{selected ? @drawable/item_aspect_background_selected : @drawable/item_aspect_background_not_selected}"
         android:fontFamily="sans-serif-condensed"
         android:padding="@dimen/padding_small"
         android:textAlignment="center"
-        android:textSize="@dimen/font_big"
+        android:textSize="@dimen/font_normal_plus"
         android:textColor="@{selected ? @android:color/white : @color/text_color}"
         tools:text="ASPECT_PLACEHOLDER">
 
