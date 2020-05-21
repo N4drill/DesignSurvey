@@ -12,7 +12,7 @@ data class QuestionEntity(
         COLOR("kolory", "color"),
         SIZING("rozmiary", "sizing"),
         PLACEMENT("rozmieszczenie", "placement"),
-        INTUITIVITY("czytelność", "intuitivity"),
+        INTUITIVENESS("intuicyjność", "intuitiveness"),
         TEXT("teksty", "text"),
         ICONS("ikony", "icons")
     }

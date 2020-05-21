@@ -17,6 +17,7 @@
     <!-- Font sizes -->
     <dimen name="font_tiny">8sp</dimen>
     <dimen name="font_small">12sp</dimen>
+    <dimen name="font_small_plus">15sp</dimen>
     <dimen name="font_normal">16sp</dimen>
     <dimen name="font_normal_plus">18sp</dimen>
     <dimen name="font_normal_plus2">20sp</dimen>

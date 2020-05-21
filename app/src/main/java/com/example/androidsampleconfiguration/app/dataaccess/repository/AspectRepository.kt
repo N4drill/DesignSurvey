@@ -5,7 +5,7 @@ import com.example.androidsampleconfiguration.app.dataaccess.model.AspectFiresto
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.COLOR
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.ICONS
-import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.INTUITIVITY
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.INTUITIVENESS
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.PLACEMENT
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.SIZING
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.TEXT
@@ -27,13 +27,18 @@ class AspectsRepository @Inject constructor(
                 .map { aspect -> aspect.toAspect() }
         }.toList()
 
-    private fun AspectFirestore.toAspect(): Aspect? = when (name) {
-        "color" -> COLOR
-        "placement" -> PLACEMENT
-        "intuitivity" -> INTUITIVITY
-        "sizing" -> SIZING
-        "text" -> TEXT
-        "icons" -> ICONS
-        else -> null
+    private fun AspectFirestore.toAspect(): Aspect = when (name) {
+        COLOR.english -> COLOR
+        PLACEMENT.english -> PLACEMENT
+        INTUITIVENESS.english -> INTUITIVENESS
+        SIZING.english -> SIZING
+        TEXT.english -> TEXT
+        ICONS.english -> ICONS
+        else -> throw WrongAspectException
     }
+}
+
+object WrongAspectException : Exception(){
+    override val message: String?
+        get() = "Zly aspect"
 }
