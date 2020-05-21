@@ -1,5 +1,6 @@
 package com.example.androidsampleconfiguration.app.entity
 
+
 data class QuestionEntity(
     val id: String,
     val aspects: List<Aspect>,
@@ -7,13 +8,13 @@ data class QuestionEntity(
     val url: String
 ) {
 
-    enum class Aspect(val title: String) {
-        COLOR("color"),
-        PLACEMENT("placement"),
-        SIZING("sizing"),
-        INTUITIVITY("intuitivity"),
-        TEXT("text"),
-        ICONS("icons")
+    enum class Aspect(val polish: String, val english: String) {
+        COLOR("kolory", "color"),
+        SIZING("rozmiary", "sizing"),
+        PLACEMENT("rozmieszczenie", "placement"),
+        INTUITIVITY("czytelność", "intuitivity"),
+        TEXT("teksty", "text"),
+        ICONS("ikony", "icons")
     }
 
     enum class Type {

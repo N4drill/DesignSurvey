@@ -158,7 +158,7 @@ class MasterFragment : DaggerFragment() {
         } else {
             val navController = findNavController()
             val action = MasterFragmentDirections.masterToDialog(
-                aspects = question.aspects.map { it.title }.toTypedArray(),
+                aspects = question.aspects.map { it.english }.toTypedArray(),
                 imageUrl = question.url
             )
             navController.navigate(action)
