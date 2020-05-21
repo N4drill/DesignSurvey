@@ -11,7 +11,9 @@ data class QuestionEntity(
         COLOR("color"),
         PLACEMENT("placement"),
         SIZING("sizing"),
-        READABILITY("readability")
+        INTUITIVITY("intuitivity"),
+        TEXT("text"),
+        ICONS("icons")
     }
 
     enum class Type {

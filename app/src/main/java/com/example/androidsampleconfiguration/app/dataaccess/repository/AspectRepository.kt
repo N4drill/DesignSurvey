@@ -4,9 +4,11 @@ import com.example.androidsampleconfiguration.app.dataaccess.FirebaseService
 import com.example.androidsampleconfiguration.app.dataaccess.model.AspectFirestore
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.COLOR
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.ICONS
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.INTUITIVITY
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.PLACEMENT
-import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.READABILITY
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.SIZING
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.TEXT
 import com.google.firebase.firestore.DocumentReference
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -28,8 +30,10 @@ class AspectsRepository @Inject constructor(
     private fun AspectFirestore.toAspect(): Aspect? = when (name) {
         "color" -> COLOR
         "placement" -> PLACEMENT
-        "readability" -> READABILITY
+        "intuitivity" -> INTUITIVITY
         "sizing" -> SIZING
+        "text" -> TEXT
+        "icons" -> ICONS
         else -> null
     }
 }
