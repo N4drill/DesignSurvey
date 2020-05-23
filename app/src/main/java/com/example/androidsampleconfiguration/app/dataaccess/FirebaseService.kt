@@ -19,6 +19,9 @@ import javax.inject.Inject
 class FirebaseService @Inject constructor(
     private val firestore: FirebaseFirestore
 ) {
+    fun getAllAspects(): Single<List<AspectFirestore>> = firestore.collection(ASPECT_COLLECTION).also {
+        Timber.d("Running getAllAspects")
+    }.getSingle()
 
     fun getAllQuestions(): Single<List<QuestionFirestore>> = firestore.collection(QUESTION_COLLECTION).also {
         Timber.d("Running getAllQuestions")

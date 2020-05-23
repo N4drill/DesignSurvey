@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.androidsampleconfiguration.R
 import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect
 import com.example.androidsampleconfiguration.app.ui.DaggerViewModelFactory
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.AllQuestionSolved
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.ItemsLoaded
@@ -121,7 +122,10 @@ class MasterFragment : DaggerFragment() {
             .subscribe({
                 when (it) {
                     ItemsLoaded -> onItemsLoaded()
-                    is QuestionSwiped -> onQuestionSwiped(question = it.question)
+                    is QuestionSwiped -> onQuestionSwiped(
+                        question = it.question,
+                        availableAspects = it.availableAspects
+                    )
                     SurveyReady -> onSurveyReady()
                     AllQuestionSolved -> onAllQuestionSolved()
                 }.exhaustivePatternCheck()
@@ -152,17 +156,13 @@ class MasterFragment : DaggerFragment() {
         }
     }
 
-    private fun onQuestionSwiped(question: QuestionEntity) {
-        if (question.aspects.isEmpty()) {
-            viewModel.sendAnswer(aspectsSelected = emptyList())
-        } else {
-            val navController = findNavController()
-            val action = MasterFragmentDirections.masterToDialog(
-                aspects = question.aspects.map { it.english }.toTypedArray(),
-                imageUrl = question.url
-            )
-            navController.navigate(action)
-        }
+    private fun onQuestionSwiped(question: QuestionEntity, availableAspects: List<Aspect>) {
+        val navController = findNavController()
+        val action = MasterFragmentDirections.masterToDialog(
+            aspects = availableAspects.map { it.english }.toTypedArray(),
+            imageUrl = question.url
+        )
+        navController.navigate(action)
     }
 
     override fun onPause() {

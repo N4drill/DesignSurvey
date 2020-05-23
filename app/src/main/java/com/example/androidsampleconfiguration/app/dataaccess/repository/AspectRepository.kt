@@ -27,6 +27,11 @@ class AspectsRepository @Inject constructor(
                 .map { aspect -> aspect.toAspect() }
         }.toList()
 
+    fun getAllAvailableAspects(): Single<List<Aspect>> =
+        firebaseService.getAllAspects().map {
+            it.map { aspectFirestore -> aspectFirestore.toAspect() }
+        }
+
     private fun AspectFirestore.toAspect(): Aspect = when (name) {
         COLOR.english -> COLOR
         PLACEMENT.english -> PLACEMENT
@@ -38,7 +43,7 @@ class AspectsRepository @Inject constructor(
     }
 }
 
-object WrongAspectException : Exception(){
+object WrongAspectException : Exception() {
     override val message: String?
         get() = "Zly aspect"
 }

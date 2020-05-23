@@ -3,11 +3,13 @@ package com.example.androidsampleconfiguration.app.ui.master
 import androidx.lifecycle.AndroidViewModel
 import com.example.androidsampleconfiguration.app.App
 import com.example.androidsampleconfiguration.app.dataaccess.repository.UserRepository
+import com.example.androidsampleconfiguration.app.domain.GetAllAspects
 import com.example.androidsampleconfiguration.app.domain.GetCurrentUser
 import com.example.androidsampleconfiguration.app.domain.GetNotAnsweredQuestions
 import com.example.androidsampleconfiguration.app.domain.InsertAnswer
 import com.example.androidsampleconfiguration.app.domain.SharedPreferenceManager
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect
 import com.example.androidsampleconfiguration.app.presentation.Question
 import com.example.androidsampleconfiguration.app.presentation.toQuestions
 import com.example.androidsampleconfiguration.app.ui.master.MasterViewModel.Action.AllQuestionSolved
@@ -37,13 +39,14 @@ import javax.inject.Inject
 
 class MasterViewModel @Inject constructor(
     application: App,
+    getAllAspects: GetAllAspects,
     getNotAnsweredQuestions: GetNotAnsweredQuestions,
     private val getCurrentUser: GetCurrentUser,
     private val sharedPreferenceManager: SharedPreferenceManager,
     private val userRepository: UserRepository,
     private val insertAnswer: InsertAnswer,
     private val masterFragment: MasterFragment
-) : AndroidViewModel(application) {
+    ) : AndroidViewModel(application) {
 
     private val compositeDisposable = CompositeDisposable()
     private var availableQuestions: List<QuestionEntity> = emptyList()
@@ -63,6 +66,8 @@ class MasterViewModel @Inject constructor(
     val questions: Observable<List<Question>>
         get() = questionsSubject.observeOnMain()
 
+    lateinit var availableAspects: List<Aspect>
+
     private var startQuestionTime = currentTimeMillis()
     private var startDraggingTime = DEFAULT_DRAGGING_TIME
     private var swapDirectionChanged = DEFAULT_DIRECTION_CHANGE_COUNT
@@ -74,6 +79,14 @@ class MasterViewModel @Inject constructor(
     private var nextReserved: Int = 0
 
     init {
+        getAllAspects.execute()
+            .subscribeOnIO()
+            .observeOnMain()
+            .subscribe({
+                availableAspects = it
+            }, { Timber.d("Error while getting all available Aspects") })
+            .addTo(compositeDisposable)
+
         getCurrentUser.execute() // TODO: Refactor ???
             .subscribeOnIO()
             .observeOnMain()
@@ -161,7 +174,7 @@ class MasterViewModel @Inject constructor(
     private fun onSwiped(event: OnSwiped) {
         Timber.d("SURVEY: Question swiped: ${event.direction}")
         endQuestionTime = currentTimeMillis()
-        actionSubject.onNext(QuestionSwiped(currentQuestion))
+        actionSubject.onNext(QuestionSwiped(currentQuestion, availableAspects))
     }
 
     private fun onAppeared(event: OnAppeared) {
@@ -228,7 +241,7 @@ class MasterViewModel @Inject constructor(
     sealed class Action {
 
         object ItemsLoaded : Action()
-        data class QuestionSwiped(val question: QuestionEntity) : Action()
+        data class QuestionSwiped(val question: QuestionEntity, val availableAspects: List<Aspect>) : Action()
         object SurveyReady : Action()
         object AllQuestionSolved : Action()
     }
