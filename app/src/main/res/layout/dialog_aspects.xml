@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="swipedRight"
+            type="boolean" />
+
+        <variable
+            name="scoreSelected"
             type="boolean" />
     </data>
 
@@ -52,26 +57,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
-                app:layout_constraintBottom_toTopOf="@id/btn_aspects_accept"
+                android:layout_marginBottom="@dimen/margin_small"
+                app:layout_constraintBottom_toTopOf="@id/separate_line"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_preview" />
+
+            <View
+                android:id="@+id/separate_line"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="4dp"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_tiny"
+                android:background="@drawable/separate_line"
+                app:layout_constraintBottom_toTopOf="@id/l_rating"
+                app:layout_constraintLeft_toLeftOf="@id/rv_aspects_recycler"
+                app:layout_constraintRight_toRightOf="@id/rv_aspects_recycler"
+                app:layout_constraintTop_toBottomOf="@id/rv_aspects_recycler" />
+
+            <include
+                android:id="@+id/l_rating"
+                layout="@layout/layout_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                app:layout_constraintBottom_toTopOf="@id/btn_aspects_accept"
+                app:layout_constraintLeft_toLeftOf="@id/rv_aspects_recycler"
+                app:layout_constraintRight_toRightOf="@id/rv_aspects_recycler"
+                app:layout_constraintTop_toBottomOf="@id/separate_line" />
+
 
             <Button
                 android:id="@+id/btn_aspects_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginTop="@dimen/margin_tiny"
-                android:background="@drawable/button_background"
                 android:padding="@dimen/padding_small"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:text="@string/aspects_dialog_button"
                 android:textSize="@dimen/font_normal_plus"
+                android:background="@{scoreSelected ? @drawable/button_background : @drawable/button_background_disable}"
+                android:clickable="@{scoreSelected}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_aspects_recycler" />
+                app:layout_constraintTop_toBottomOf="@id/l_rating" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

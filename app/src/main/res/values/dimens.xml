@@ -5,6 +5,7 @@
     <!-- Margins -->
     <dimen name="margin_tiny">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_small_plus">12dp</dimen>
     <dimen name="margin_default">16dp</dimen>
     <dimen name="margin_big">32dp</dimen>
     <dimen name="margin_super_big">48dp</dimen>

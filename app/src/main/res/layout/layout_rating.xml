@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="number"
+            type="int" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_rating_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            android:textSize="@dimen/font_normal"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_score_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small_plus"
+            android:background="@{number == 1 ? @drawable/score_background_selected : @drawable/score_background_not_selected}"
+            android:padding="@dimen/padding_small"
+            android:text="@string/score_1"
+            android:textColor="@{number == 1 ? @android:color/white : @color/text_color}"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/tv_score_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small_plus"
+            android:background="@{number == 2 ? @drawable/score_background_selected : @drawable/score_background_not_selected}"
+            android:padding="@dimen/padding_small"
+            android:text="@string/score_2"
+            android:textColor="@{number == 2 ? @android:color/white : @color/text_color}"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/tv_score_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small_plus"
+            android:background="@{number == 3 ? @drawable/score_background_selected : @drawable/score_background_not_selected}"
+            android:padding="@dimen/padding_small"
+            android:text="@string/score_3"
+            android:textColor="@{number == 3 ? @android:color/white : @color/text_color}"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/tv_score_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small_plus"
+            android:background="@{number == 4 ? @drawable/score_background_selected : @drawable/score_background_not_selected}"
+            android:padding="@dimen/padding_small"
+            android:text="@string/score_4"
+            android:textColor="@{number == 4 ? @android:color/white : @color/text_color}"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/tv_score_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_small_plus"
+            android:background="@{number == 5 ? @drawable/score_background_selected : @drawable/score_background_not_selected}"
+            android:padding="@dimen/padding_small"
+            android:text="@string/score_5"
+            android:textColor="@{number == 5 ? @android:color/white : @color/text_color}"
+            android:textSize="@dimen/font_normal" />
+
+    </LinearLayout>
+</layout>

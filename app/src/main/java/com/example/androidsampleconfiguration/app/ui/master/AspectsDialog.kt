@@ -50,8 +50,16 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
             this@AspectsDialog.isCancelable = false
             this@AspectsDialog.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             setupRecycler(args.aspects.toList())
+            setupRating()
             setupLayout(args.imageUrl)
         }.root
+
+    private fun DialogAspectsBinding.setupRating() {
+        lRating.number = 0
+        scoreSelected = false
+    }
+
+    class RatingItemClickListener
 
     private fun DialogAspectsBinding.setupLayout(imageUrl: String) {
         swipedRight = args.swipedRight

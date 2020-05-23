@@ -32,6 +32,12 @@
     <string name="instructions_label">Instrukcje</string>
     <string name="pause_label">Przerwa</string>
     <string name="instruction_start_button">Rozumiem, zaczynamy!</string>
+    <string name="rating">Ocena:</string>
+    <string name="score_1">1</string>
+    <string name="score_2">2</string>
+    <string name="score_3">3</string>
+    <string name="score_4">4</string>
+    <string name="score_5">5</string>
     <!-- Arrays -->
 
     <string-array name="professions">
