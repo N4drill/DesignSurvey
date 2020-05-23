@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="swipedRight"
+            type="boolean" />
     </data>
 
     <FrameLayout
@@ -15,7 +17,7 @@
             android:id="@+id/aspectsContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/aspects_background"
+            android:background="@{swipedRight ? @drawable/aspect_background_positive : @drawable/aspects_background}"
             android:padding="@dimen/padding_default">
 
 

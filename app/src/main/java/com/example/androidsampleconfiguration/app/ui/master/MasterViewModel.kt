@@ -46,7 +46,7 @@ class MasterViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val insertAnswer: InsertAnswer,
     private val masterFragment: MasterFragment
-    ) : AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     private val compositeDisposable = CompositeDisposable()
     private var availableQuestions: List<QuestionEntity> = emptyList()
@@ -174,7 +174,7 @@ class MasterViewModel @Inject constructor(
     private fun onSwiped(event: OnSwiped) {
         Timber.d("SURVEY: Question swiped: ${event.direction}")
         endQuestionTime = currentTimeMillis()
-        actionSubject.onNext(QuestionSwiped(currentQuestion, availableAspects))
+        actionSubject.onNext(QuestionSwiped(currentQuestion, availableAspects, event.direction))
     }
 
     private fun onAppeared(event: OnAppeared) {
@@ -241,7 +241,12 @@ class MasterViewModel @Inject constructor(
     sealed class Action {
 
         object ItemsLoaded : Action()
-        data class QuestionSwiped(val question: QuestionEntity, val availableAspects: List<Aspect>) : Action()
+        data class QuestionSwiped(
+            val question: QuestionEntity,
+            val availableAspects: List<Aspect>,
+            val direction: Direction
+        ) : Action()
+
         object SurveyReady : Action()
         object AllQuestionSolved : Action()
     }

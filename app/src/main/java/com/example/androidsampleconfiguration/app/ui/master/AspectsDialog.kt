@@ -52,6 +52,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
         }.root
 
     private fun DialogAspectsBinding.setupLayout(imageUrl: String) {
+        swipedRight = args.swipedRight
         btnAspectsAccept.setOnClickListener {
             val result = aspectAdapter.items.filter { it.selected }.map { it.title }
             aspectObserver.aspectsSubject.onNext(result.translate(toEnglish = true))

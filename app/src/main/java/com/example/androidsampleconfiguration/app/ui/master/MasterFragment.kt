@@ -23,6 +23,7 @@ import com.example.androidsampleconfiguration.app.ui.tutorial.TutorialActivity
 import com.example.androidsampleconfiguration.commons.extensions.addTo
 import com.example.androidsampleconfiguration.commons.extensions.exhaustivePatternCheck
 import com.example.androidsampleconfiguration.databinding.FragmentMasterBinding
+import com.yuyakaido.android.cardstackview.Direction
 import dagger.android.support.DaggerFragment
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
@@ -124,7 +125,8 @@ class MasterFragment : DaggerFragment() {
                     ItemsLoaded -> onItemsLoaded()
                     is QuestionSwiped -> onQuestionSwiped(
                         question = it.question,
-                        availableAspects = it.availableAspects
+                        availableAspects = it.availableAspects,
+                        direction = it.direction
                     )
                     SurveyReady -> onSurveyReady()
                     AllQuestionSolved -> onAllQuestionSolved()
@@ -156,11 +158,13 @@ class MasterFragment : DaggerFragment() {
         }
     }
 
-    private fun onQuestionSwiped(question: QuestionEntity, availableAspects: List<Aspect>) {
+    private fun onQuestionSwiped(question: QuestionEntity, availableAspects: List<Aspect>, direction: Direction) {
         val navController = findNavController()
+        val swipedRight = direction == Direction.Right
         val action = MasterFragmentDirections.masterToDialog(
             aspects = availableAspects.map { it.english }.toTypedArray(),
-            imageUrl = question.url
+            imageUrl = question.url,
+            swipedRight = swipedRight
         )
         navController.navigate(action)
     }

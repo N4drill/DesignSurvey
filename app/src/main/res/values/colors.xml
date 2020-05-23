@@ -13,5 +13,8 @@
 
     <color name="color_overlay_dislike_background">#EB6B6B</color>
     <color name="color_overlay_like_background">#90BB7D</color>
+
+    <color name="color_aspect_positive">#7AA26A</color>
+    <color name="color_aspect_positive_light">#B7E7A4</color>
     <color name="blur">#C6808080</color>
 </resources>
