@@ -29,6 +29,7 @@ import com.example.androidsampleconfiguration.commons.extensions.observeOnMain
 import com.example.androidsampleconfiguration.commons.extensions.subscribeOnIO
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.Direction.Left
+import com.yuyakaido.android.cardstackview.Direction.Right
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
@@ -145,6 +146,7 @@ class MasterViewModel @Inject constructor(
         Timber.d("SURVEY: Dragging started")
         if (startDraggingTime == DEFAULT_DRAGGING_TIME) {
             startDraggingTime = currentTimeMillis()
+
             Timber.d("SURVEY: Started dragging")
         }
         currentSwapDirection = when {
@@ -171,7 +173,9 @@ class MasterViewModel @Inject constructor(
     private fun onDisappeared(event: OnDisappeared) {}
 
     private fun onDragging(event: OnDragging) {
-        startDragging(event.direction)
+        if (event.direction == Left || event.direction == Right) {
+            startDragging(event.direction)
+        }
     }
 
     private fun onSwiped(event: OnSwiped) {
