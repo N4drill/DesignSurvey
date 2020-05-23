@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
-import com.example.androidsampleconfiguration.R
+import com.example.androidsampleconfiguration.app.domain.GetTutorialSteps
 import com.example.androidsampleconfiguration.app.ui.MainActivity
 import com.example.androidsampleconfiguration.commons.OnTabSelectListener
 import com.example.androidsampleconfiguration.databinding.FragmentInstructionBinding
@@ -14,10 +14,15 @@ import com.google.android.material.tabs.TabLayout.Tab
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class TutorialFragment : DaggerFragment(){
+class TutorialFragment : DaggerFragment() {
 
     @Inject
     lateinit var tutorialActivity: TutorialActivity
+
+    @Inject
+    lateinit var getTutorialSteps: GetTutorialSteps
+
+    private val steps: List<Step> by lazy { getTutorialSteps.execute() }
 
     lateinit var binding: FragmentInstructionBinding
 
@@ -66,21 +71,3 @@ class TutorialFragment : DaggerFragment(){
     }
 }
 
-val steps: List<Step> = listOf(
-    Step(
-        drawableRes = R.drawable.ic_android_black_24dp,
-        message = "Message1"
-    ),
-    Step(
-        drawableRes = R.drawable.ic_android_black_24dp,
-        message = "Message2"
-    ),
-    Step(
-        drawableRes = R.drawable.ic_android_black_24dp,
-        message = "Message3"
-    ),
-    Step(
-        drawableRes = R.drawable.ic_android_black_24dp,
-        message = "Message4"
-    )
-)

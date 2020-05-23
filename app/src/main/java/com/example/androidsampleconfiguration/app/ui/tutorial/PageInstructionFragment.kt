@@ -13,7 +13,9 @@ class PageInstructionFragment : Fragment() {
     lateinit var binding: PageInstructionBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return PageInstructionBinding.inflate(inflater, container, false).apply { binding = this }.root
+        return PageInstructionBinding.inflate(inflater, container, false).apply {
+            binding = this
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

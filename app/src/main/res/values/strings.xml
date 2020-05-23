@@ -15,8 +15,8 @@
     <string name="form_accept">To ja, idźmy dalej</string>
     <string name="profession_non_programmer">Brak</string>
     <string name="exit_message">Cofnij jeszcze raz aby wyjść</string>
-    <string name="survey_ready">Ankieta gotowa, zaczynamy!</string>
-    <string name="hide_button_ready">Rozpocznij!</string>
+    <string name="survey_ready">Ankieta gotowa.</string>
+    <string name="hide_button_ready">Ruszaj!</string>
 
 
     <string name="no_experience">Brak</string>
@@ -38,6 +38,18 @@
     <string name="score_3">3</string>
     <string name="score_4">4</string>
     <string name="score_5">5</string>
+
+    <string name="step1">Witaj drogi testerze! Dziękuję, że postanowiłeś wziąć udział w badaniu do mojej pracy magisterskiej. To dla mnie ważne żebyś postępował zgodnie z instrukcjami także przeczytaj je uważnie!</string>
+    <string name="step2">Podczas uczestniczenia w badaniu, miej cały czas stały dostęp do internetu.\n Proszę, nie próbuj psuć aplikacji :)</string>
+    <string name="step3">To ekran główny. Przedstawię Ci na nim przykłady interfejsów użytkownika. Oceń instynktownie i jak najszybciej potrafisz każdy z nich.\n<b>Nie zwlekaj, to ważne!</b></string>
+    <string name="step4">Ten ruch na pewno znasz.\nPrzesuń kartą w jeżeli interfejs Ci się <b>podoba</b>\nlub\nw <b>lewo</b> jeżeli <b>nie podoba</b>.\n Pamiętaj, rób to szybko i instynktownie!</string>
+    <string name="step5">Zawsze możesz sobie zrobić przerwę w badaniu.</string>
+    <string name="step6">Nie martw się. Do instrukcji możesz zawsze wrócić gdy pojawią się wątpliwości</string>
+    <string name="step7">Po każdej udzielonej odpowiedzi zapytam Cię dlaczego podjąłeś taką decyzję.\nZawsze będziesz widział podgląd interfejsu, który oceniłeś.</string>
+    <string name="step8">Wybierz aspekty, które wpłynęły na Twoją decyzję oceniając dany interfejs.</string>
+    <string name="step9">Oraz wybierz jak mocno jesteś pewny swojej oceny:\n1- Jestem bardzo niepewny\n2- Jestem niepewny\n3- Mam mieszane uczucia\n4- Jestem raczej pewien\n5- Nie mam wątpliwości</string>
+    <string name="step10">Przy tej części nie musisz się spieszyć dlatego proszę, zastanów się dobrze zanim zaakceptujesz wybrane odpowiedzi.\nTo ważne dla badania.</string>
+    <string name="step11">Pytań jest <b>30</b>. Całe badanie zajmie Ci co najwyżej 10 minut a dla mnie będzie to bardzo duży krok naprzód w mojej pracy.\nDzięki!</string>
     <!-- Arrays -->
 
     <string-array name="professions">

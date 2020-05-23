@@ -21,7 +21,7 @@ class TutorialPagerAdapter(
     override fun getCount(): Int = steps.size
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return "Krok ${position + 1}"
+        return "${position + 1}"
     }
 
     companion object {
