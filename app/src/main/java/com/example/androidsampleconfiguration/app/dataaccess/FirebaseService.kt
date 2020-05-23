@@ -19,6 +19,7 @@ import javax.inject.Inject
 class FirebaseService @Inject constructor(
     private val firestore: FirebaseFirestore
 ) {
+
     fun getAllAspects(): Single<List<AspectFirestore>> = firestore.collection(ASPECT_COLLECTION).also {
         Timber.d("Running getAllAspects")
     }.getSingle()
@@ -76,6 +77,7 @@ class FirebaseService @Inject constructor(
             toInsert["finaldecision"] = finalDecision
             toInsert["user"] = requireNotNull(user)
             toInsert["selectedAspects"] = selectedAspects
+            toInsert["rating"] = rating
         }
 
         val answerRef = firestore.collection(ANSWER_COLLECTION)

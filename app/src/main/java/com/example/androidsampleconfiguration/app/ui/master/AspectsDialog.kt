@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.State
 import com.bumptech.glide.Glide
 import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
+import com.example.androidsampleconfiguration.app.entity.DialogData
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.Aspect
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.AspectListener
 import com.example.androidsampleconfiguration.commons.extensions.autoNotify
@@ -28,6 +29,7 @@ import kotlin.properties.Delegates
 class AspectsDialog : DaggerDialogFragment(), AspectListener {
 
     private lateinit var aspectAdapter: AspectAdapter
+    private lateinit var binding: DialogAspectsBinding
 
     @Inject
     lateinit var aspectObserver: AspectObserver
@@ -47,6 +49,7 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         DialogAspectsBinding.inflate(inflater, container, false).apply {
+            binding = this
             this@AspectsDialog.isCancelable = false
             this@AspectsDialog.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             setupRecycler(args.aspects.toList())
@@ -57,19 +60,36 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
     private fun DialogAspectsBinding.setupRating() {
         lRating.number = 0
         scoreSelected = false
+        lRating.tvScore1.setOnClickListener { setRatingNumber(number = 1) }
+        lRating.tvScore2.setOnClickListener { setRatingNumber(number = 2) }
+        lRating.tvScore3.setOnClickListener { setRatingNumber(number = 3) }
+        lRating.tvScore4.setOnClickListener { setRatingNumber(number = 4) }
+        lRating.tvScore5.setOnClickListener { setRatingNumber(number = 5) }
     }
 
-    class RatingItemClickListener
+    private fun setRatingNumber(number: Int) {
+        with(binding) {
+            if (!scoreSelected) scoreSelected = true
+            lRating.number = number
+        }
+    }
 
     private fun DialogAspectsBinding.setupLayout(imageUrl: String) {
         swipedRight = args.swipedRight
-        btnAspectsAccept.setOnClickListener {
-            val result = aspectAdapter.items.filter { it.selected }.map { it.title }
-            aspectObserver.aspectsSubject.onNext(result.translate(toEnglish = true))
-            findNavController().navigateUp()
-        }
+        btnAspectsAccept.setOnClickListener { onAcceptButtonClicked() }
 
         Glide.with(this@AspectsDialog).load(imageUrl).into(ivPreview)
+    }
+
+    private fun onAcceptButtonClicked() {
+        val result = aspectAdapter.items.filter { it.selected }.map { it.title }
+        aspectObserver.aspectsSubject.onNext(
+            DialogData(
+                selectedAspects = result.translate(toEnglish = true),
+                rating = binding.lRating.number
+            )
+        )
+        findNavController().navigateUp()
     }
 
     private fun DialogAspectsBinding.setupRecycler(aspects: List<String>) {

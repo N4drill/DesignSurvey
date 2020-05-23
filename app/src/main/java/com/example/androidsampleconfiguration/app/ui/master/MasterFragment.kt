@@ -99,7 +99,7 @@ class MasterFragment : DaggerFragment() {
     private fun observeAspects() {
         aspectObserver.aspects.subscribe({
             Timber.d("GOT NEW ASPECTS, DIALOG TRIGGERED!: $it")
-            onAspectsDialogCall(it)
+            onAspectsDialogCall(selectedAspects = it.selectedAspects, rating = it.rating)
         }, { Timber.e(it, "Something went wrong watching ASPECTS") })
             .addTo(compositeDisposable)
     }
@@ -140,8 +140,8 @@ class MasterFragment : DaggerFragment() {
             .addTo(compositeDisposable)
     }
 
-    private fun onAspectsDialogCall(selectedAspects: List<String>) {
-        viewModel.sendAnswer(selectedAspects)
+    private fun onAspectsDialogCall(selectedAspects: List<String>, rating: Int) {
+        viewModel.sendAnswer(selectedAspects, rating)
     }
 
     private fun onAllQuestionSolved() {

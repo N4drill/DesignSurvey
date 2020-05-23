@@ -15,7 +15,8 @@ data class AnswerFirestore(
     @PropertyName("firstdecision") val firstDecision: String = "",
     @PropertyName("finaldecision") val finalDecision: String = "",
     @PropertyName("user") val user: UserFirestore? = null,
-    @PropertyName("selectedAspects") val selectedAspects: ArrayList<String> = arrayListOf()
+    @PropertyName("selectedAspects") val selectedAspects: ArrayList<String> = arrayListOf(),
+    @PropertyName("rating") val rating: Int = 0
 )
 
 fun AnswerModel.toAnswerFirestore(): AnswerFirestore = AnswerFirestore(
@@ -27,7 +28,8 @@ fun AnswerModel.toAnswerFirestore(): AnswerFirestore = AnswerFirestore(
     dragFails = dragFails,
     firstDecision = firstDecision.toFirestoreName(),
     finalDecision = finalDecision.toFirestoreName(),
-    selectedAspects = ArrayList(selectedAspects)
+    selectedAspects = ArrayList(selectedAspects),
+    rating = rating
 )
 
 fun Direction.toFirestoreName(): String = when (this) {

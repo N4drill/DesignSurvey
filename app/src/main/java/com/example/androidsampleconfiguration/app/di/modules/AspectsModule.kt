@@ -1,5 +1,6 @@
 package com.example.androidsampleconfiguration.app.di.modules
 
+import com.example.androidsampleconfiguration.app.entity.DialogData
 import com.example.androidsampleconfiguration.commons.extensions.observeOnMain
 import dagger.Module
 import dagger.Provides
@@ -17,8 +18,7 @@ class AspectModule {
 }
 
 class AspectObserver {
-    val aspectsSubject = PublishSubject.create<List<String>>()
-    val aspects: Observable<List<String>>
+    val aspectsSubject = PublishSubject.create<DialogData>()
+    val aspects: Observable<DialogData>
         get() = aspectsSubject.observeOnMain()
-
 }

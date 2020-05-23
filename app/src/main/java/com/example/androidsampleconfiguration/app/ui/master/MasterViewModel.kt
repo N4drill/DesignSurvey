@@ -192,7 +192,7 @@ class MasterViewModel @Inject constructor(
 
     private fun onRewound() {}
 
-    fun sendAnswer(aspectsSelected: List<String>) {
+    fun sendAnswer(aspectsSelected: List<String>, rating: Int) {
         Timber.d("Send answer get: $aspectsSelected")
         val currentTime = currentTimeMillis()
         val answerTime = endQuestionTime - startQuestionTime
@@ -206,7 +206,8 @@ class MasterViewModel @Inject constructor(
             firstDecision = requireNotNull(firstDirection),
             finalDecision = requireNotNull(currentSwapDirection),
             swapDirectionChangesCount = swapDirectionChanged,
-            selectedAspects = aspectsSelected
+            selectedAspects = aspectsSelected,
+            rating = rating
         )
 
         startNewQuestion()
@@ -234,7 +235,8 @@ class MasterViewModel @Inject constructor(
         val swapDirectionChangesCount: Int,
         val firstDecision: Direction,
         val finalDecision: Direction,
-        val selectedAspects: List<String>
+        val selectedAspects: List<String>,
+        val rating: Int
     )
 
     //region Actions and Commands
