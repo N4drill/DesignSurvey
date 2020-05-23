@@ -1,6 +1,7 @@
 package com.example.androidsampleconfiguration.app.ui.master
 
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.State
 import com.bumptech.glide.Glide
 import com.example.androidsampleconfiguration.app.di.modules.AspectObserver
 import com.example.androidsampleconfiguration.app.ui.master.AspectAdapter.Aspect
@@ -64,8 +66,9 @@ class AspectsDialog : DaggerDialogFragment(), AspectListener {
 
     private fun DialogAspectsBinding.setupRecycler(aspects: List<String>) {
         rvAspectsRecycler.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
             adapter = AspectAdapter(aspectListener = this@AspectsDialog).also { aspectAdapter = it }
+            addItemDecoration(SpacesItemDecoration())
         }
         aspectAdapter.items = aspects.translate(toEnglish = false).toAspects()
     }
@@ -110,5 +113,11 @@ class AspectAdapter(private val aspectListener: AspectListener) :
 
     interface AspectListener {
         fun aspectClicked(aspect: Aspect)
+    }
+}
+
+class SpacesItemDecoration : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
+        outRect.set(8, 8, 8, 8)
     }
 }
