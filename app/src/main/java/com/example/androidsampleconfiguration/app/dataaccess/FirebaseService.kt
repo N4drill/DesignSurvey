@@ -78,6 +78,7 @@ class FirebaseService @Inject constructor(
             toInsert["user"] = requireNotNull(user)
             toInsert["selectedAspects"] = selectedAspects
             toInsert["rating"] = rating
+            toInsert["canceltoanswertime"] = cancelToAnswerTime
         }
 
         val answerRef = firestore.collection(ANSWER_COLLECTION)

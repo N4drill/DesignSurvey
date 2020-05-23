@@ -70,6 +70,7 @@ class MasterViewModel @Inject constructor(
 
     private var startQuestionTime = currentTimeMillis()
     private var startDraggingTime = DEFAULT_DRAGGING_TIME
+    private var startAfterCancelTime = currentTimeMillis()
     private var swapDirectionChanged = DEFAULT_DIRECTION_CHANGE_COUNT
     private var failedToSwap = DEFAULT_FAILED_TO_SWAP
     private var firstDirection: Direction? = null
@@ -128,6 +129,7 @@ class MasterViewModel @Inject constructor(
         startQuestionTime = currentTimeMillis()
         endQuestionTime = currentTimeMillis()
         startDraggingTime = DEFAULT_DRAGGING_TIME
+        startAfterCancelTime = currentTimeMillis()
         swapDirectionChanged = DEFAULT_DIRECTION_CHANGE_COUNT
         failedToSwap = DEFAULT_FAILED_TO_SWAP
         firstDirection = DEFAULT_SWAP_DIRECTION
@@ -139,6 +141,7 @@ class MasterViewModel @Inject constructor(
     }
 
     private fun startDragging(direction: Direction) {
+        startAfterCancelTime = currentTimeMillis()
         Timber.d("SURVEY: Dragging started")
         if (startDraggingTime == DEFAULT_DRAGGING_TIME) {
             startDraggingTime = currentTimeMillis()
@@ -183,10 +186,7 @@ class MasterViewModel @Inject constructor(
     }
 
     private fun onCanceled() {
-        startDraggingTime = DEFAULT_DRAGGING_TIME
-        firstDirection = null
-        currentSwapDirection = null
-        swapDirectionChanged = DEFAULT_FAILED_TO_SWAP
+        startAfterCancelTime = currentTimeMillis()
         failedToSwap++
     }
 
@@ -196,6 +196,7 @@ class MasterViewModel @Inject constructor(
         Timber.d("Send answer get: $aspectsSelected")
         val answerTime = endQuestionTime - startQuestionTime
         val lastDraggingTime = endQuestionTime - startDraggingTime
+        val cancelToAnswerTime = endQuestionTime - startAfterCancelTime
 
         val model = AnswerData(
             questionId = currentQuestion.id,
@@ -206,7 +207,8 @@ class MasterViewModel @Inject constructor(
             finalDecision = requireNotNull(currentSwapDirection),
             swapDirectionChangesCount = swapDirectionChanged,
             selectedAspects = aspectsSelected,
-            rating = rating
+            rating = rating,
+            cancelToAnswerTime = cancelToAnswerTime
         )
 
         startNewQuestion()
@@ -235,7 +237,8 @@ class MasterViewModel @Inject constructor(
         val firstDecision: Direction,
         val finalDecision: Direction,
         val selectedAspects: List<String>,
-        val rating: Int
+        val rating: Int,
+        val cancelToAnswerTime: Long
     )
 
     //region Actions and Commands

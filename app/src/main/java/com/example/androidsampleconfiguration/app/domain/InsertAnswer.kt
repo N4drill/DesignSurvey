@@ -25,7 +25,8 @@ class InsertAnswer @Inject constructor(
         finalDecision = finalDecision,
         user = userModel,
         selectedAspects = selectedAspects,
-        rating = rating
+        rating = rating,
+        cancelToAnswerTime = cancelToAnswerTime
     )
 }
 
@@ -39,5 +40,6 @@ data class AnswerModel(
     val finalDecision: Direction,
     val user: UserModel,
     val selectedAspects: List<String>,
-    val rating: Int
+    val rating: Int,
+    val cancelToAnswerTime: Long
 )
