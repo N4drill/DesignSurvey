@@ -14,9 +14,11 @@ class GetNotAnsweredQuestions @Inject constructor(
         getCurrentUser.execute().flatMap { currentUser ->
             questionRepository.getAll()
                 .map { allQuestions ->
-                    allQuestions.filter { question ->
-                        !currentUser.answeredQuestions.contains(question.id)
-                    }
+                    allQuestions
+                        .filter { question ->
+                            !currentUser.answeredQuestions.contains(question.id)
+                        }
+                        .shuffled()
                 }
         }
 }
