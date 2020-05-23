@@ -42,7 +42,7 @@
     <string name="step1">Witaj drogi testerze! Dziękuję, że postanowiłeś wziąć udział w badaniu do mojej pracy magisterskiej. To dla mnie ważne żebyś postępował zgodnie z instrukcjami także przeczytaj je uważnie!</string>
     <string name="step2">Podczas uczestniczenia w badaniu, miej cały czas stały dostęp do internetu.\n Proszę, nie próbuj psuć aplikacji :)</string>
     <string name="step3">To ekran główny. Przedstawię Ci na nim przykłady interfejsów użytkownika. Oceń instynktownie i jak najszybciej potrafisz każdy z nich.\n<b>Nie zwlekaj, to ważne!</b></string>
-    <string name="step4">Ten ruch na pewno znasz.\nPrzesuń kartą w jeżeli interfejs Ci się <b>podoba</b>\nlub\nw <b>lewo</b> jeżeli <b>nie podoba</b>.\n Pamiętaj, rób to szybko i instynktownie!</string>
+    <string name="step4">Ten ruch na pewno znasz.\nPrzesuń kartą w <b>prawo</b> jeżeli interfejs Ci się <b>podoba</b>\nlub\nw <b>lewo</b> jeżeli <b>nie podoba</b>.\n Pamiętaj, rób to szybko i instynktownie!</string>
     <string name="step5">Zawsze możesz sobie zrobić przerwę w badaniu.</string>
     <string name="step6">Nie martw się. Do instrukcji możesz zawsze wrócić gdy pojawią się wątpliwości</string>
     <string name="step7">Po każdej udzielonej odpowiedzi zapytam Cię dlaczego podjąłeś taką decyzję.\nZawsze będziesz widział podgląd interfejsu, który oceniłeś.</string>
@@ -54,14 +54,10 @@
 
     <string-array name="professions">
         <item>@string/profession_non_programmer</item>
-        <item>Programista frontendowy</item>
-        <item>Programista mobilny</item>
-        <item>Programista back-endowy</item>
+        <item>Programista</item>
         <item>Designer</item>
-        <item>Analityk</item>
-        <item>Projektant</item>
+        <item>Branża kreatywna</item>
         <item>Inny</item>
-
 
     </string-array>
 </resources>

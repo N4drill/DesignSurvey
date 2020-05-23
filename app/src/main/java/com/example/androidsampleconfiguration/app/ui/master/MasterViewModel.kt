@@ -194,9 +194,8 @@ class MasterViewModel @Inject constructor(
 
     fun sendAnswer(aspectsSelected: List<String>, rating: Int) {
         Timber.d("Send answer get: $aspectsSelected")
-        val currentTime = currentTimeMillis()
         val answerTime = endQuestionTime - startQuestionTime
-        val lastDraggingTime = currentTime - startDraggingTime
+        val lastDraggingTime = endQuestionTime - startDraggingTime
 
         val model = AnswerData(
             questionId = currentQuestion.id,
