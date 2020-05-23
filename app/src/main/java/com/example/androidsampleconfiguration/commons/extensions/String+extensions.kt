@@ -7,7 +7,7 @@ import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.P
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.SIZING
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Aspect.TEXT
 
-fun List<String>.translate(toEnglish: Boolean) = mapNotNull {
+fun List<String>.translate(toEnglish: Boolean): List<String> = mapNotNull {
     aspectMap[it.decapitalize()]?.let { aspect ->
         when (toEnglish) {
             true -> aspect.english
@@ -17,6 +17,12 @@ fun List<String>.translate(toEnglish: Boolean) = mapNotNull {
 }
 
 private val aspectMap = mapOf(
+    COLOR.polish to COLOR,
+    SIZING.polish to SIZING,
+    PLACEMENT.polish to PLACEMENT,
+    INTUITIVENESS.polish to INTUITIVENESS,
+    TEXT.polish to TEXT,
+    ICONS.polish to ICONS,
     COLOR.english to COLOR,
     SIZING.english to SIZING,
     PLACEMENT.english to PLACEMENT,
