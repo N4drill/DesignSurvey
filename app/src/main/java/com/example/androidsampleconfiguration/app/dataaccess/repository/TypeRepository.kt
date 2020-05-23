@@ -5,7 +5,7 @@ import com.example.androidsampleconfiguration.app.dataaccess.model.TypeFirestore
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type.COMPONENT
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type.LAYOUT
-import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type.TEXT_FIELD
+import com.example.androidsampleconfiguration.app.entity.QuestionEntity.Type.NAVIGATION
 import com.google.firebase.firestore.DocumentReference
 import io.reactivex.Single
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class TypeRepository @Inject constructor(
     private fun TypeFirestore.toType(): Type? = when (name) {
         "component" -> COMPONENT
         "layout" -> LAYOUT
-        "textfield" -> TEXT_FIELD
+        "navigation" -> NAVIGATION
         else -> null
     }
 }

@@ -20,6 +20,6 @@ data class QuestionEntity(
     enum class Type {
         LAYOUT,
         COMPONENT,
-        TEXT_FIELD
+        NAVIGATION
     }
 }
