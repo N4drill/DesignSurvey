@@ -215,6 +215,7 @@ class MasterViewModel @Inject constructor(
             cancelToAnswerTime = cancelToAnswerTime
         )
 
+        currentQuestion = availableQuestions[nextReserved]
         startNewQuestion()
 
         getCurrentUser.execute()
@@ -224,10 +225,9 @@ class MasterViewModel @Inject constructor(
             }.flatMapCompletable { user ->
                 userRepository.updateAnswers(
                     sharedPreferenceManager.getUserId()!!,
-                    user.answeredQuestions + currentQuestion.id
+                    user.answeredQuestions + model.questionId
                 )
             }.subscribe({
-                currentQuestion = availableQuestions[nextReserved]
             }, { Timber.e(it, "Something went wrong while inserting new answer") })
             .addTo(compositeDisposable)
     }
