@@ -5,7 +5,6 @@ import com.example.androidsampleconfiguration.app.dataaccess.model.QuestionFires
 import com.example.androidsampleconfiguration.app.entity.QuestionEntity
 import com.example.androidsampleconfiguration.commons.extensions.subscribeOnIO
 import io.reactivex.Single
-import io.reactivex.rxkotlin.Singles
 import javax.inject.Inject
 
 class QuestionRepository @Inject constructor(
@@ -23,15 +22,11 @@ class QuestionRepository @Inject constructor(
 
     private fun QuestionFirestore.toQuestionEntity(): Single<QuestionEntity>? {
         if (type == null) return null
-        return Singles.zip(
-            typeRepository.get(type),
-            aspectsRepository.getAllAspects(aspects)
-        ).map { (type, aspects) ->
+        return typeRepository.get(type).map { type ->
             QuestionEntity(
                 id = id,
                 url = url,
-                type = type,
-                aspects = aspects.mapNotNull { it }
+                type = type
             )
         }
     }

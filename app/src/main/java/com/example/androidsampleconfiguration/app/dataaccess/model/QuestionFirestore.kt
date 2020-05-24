@@ -5,7 +5,6 @@ import com.google.firebase.firestore.PropertyName
 
 data class QuestionFirestore(
     val id: String = "",
-    val aspects: ArrayList<DocumentReference> = arrayListOf(),
     val type: DocumentReference? = null,
     val url: String = ""
 )

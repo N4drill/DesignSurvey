@@ -3,7 +3,6 @@ package com.example.androidsampleconfiguration.app.entity
 
 data class QuestionEntity(
     val id: String,
-    val aspects: List<Aspect>,
     val type: Type,
     val url: String
 ) {
